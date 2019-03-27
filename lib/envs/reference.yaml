@@ -1,0 +1,5 @@
+channels:
+  - bioconda
+dependencies:
+  - emboss =6.6.0
+  - samtools=1.9

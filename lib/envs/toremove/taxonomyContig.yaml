@@ -1,0 +1,5 @@
+channels:
+  - bioconda
+dependencies:
+  - kraken =1.1
+  - krona =2.7

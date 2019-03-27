@@ -1,0 +1,4 @@
+channels:
+  - bioconda
+dependencies:
+  - roary =3.12.0

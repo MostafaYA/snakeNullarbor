@@ -1,0 +1,5 @@
+channels:
+  - bioconda
+dependencies:
+  - shovill =1.0.4
+
