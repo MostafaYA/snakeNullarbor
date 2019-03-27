@@ -1,7 +1,0 @@
-channels:
-  - bioconda
-dependencies:
-  - ariba  =2.12.1
-  - bowtie2  =2.3.4.3
-  - mummer =3.23
-

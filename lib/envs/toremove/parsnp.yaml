@@ -1,4 +1,0 @@
-channels:
-  - bioconda
-dependencies:
-  - parsnp =1.2

@@ -1,4 +1,0 @@
-channels:
-  - bioconda
-dependencies:
-  - cansnper =1.0.8

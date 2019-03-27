@@ -7,13 +7,9 @@ working_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/
 bin_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/bin/
 raw_data_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
 fasta_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
-
 #==================================================
 #==========   SOFTWARE settings    ================
 #==================================================
-
-#========== Mandatory arguments (should be changed according to user preference)
-
 taxoner: kraken
 #assembly
 trimmer: trimmomatic
@@ -30,17 +26,9 @@ prokka_genustag: Campylobacter
 #Pangenome
 roary_params: -e -n -r -v #-e, core genes alignment using PRANK, -n using mafft, -r for Rplots, # sometimes you may need to set -i (percentage identity for blastp) and -s (dont split paralogs), according to the organism
 
-#virulence and amr genes
-#AMR_db: /data/AGr110/mostafa/ariba_fmt_dbs/ariba_Card
-
-#tools:
-#  scripts_dir: /home/mostafa.abdel/aProjects/Campylobacter/snakemakeProject/Final-Snake-Project/Scripts
-
-#========== Optional arguments (the arguments in this section could be deactivated by adding the hash sign '#' before the line (fe as in MLST_options))
 #assembly_options
 #shovill_assembler: --assembler spades #choose between [spades megahit sksea]
 #shovill_options: --trim #choose between different shovill parameters [--trim --noreadcorr --nostitch --nocorr --minlen 500 --mincov 5 --keepfiles ] #--depth 0 to disable the Sub-sampling of the reads to 100
-
 #MLST_options: --scheme campylobacter #choose/exclude MLST schemes [--scheme ypseudotuberculosis --exclude campylobacter,yersinia]
 #prokka_genustag: --genus campylobacter
 
@@ -50,21 +38,5 @@ roary_params: -e -n -r -v #-e, core genes alignment using PRANK, -n using mafft,
 #==================================================
 #     (The path to databases must be adapted)
 #==================================================
-#databases
-#B:
 #database
 kraken: /home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB #scan fasta files against this database (could also be minikrakendb)
-#krona: /home/DB/Krona_Taxonomy
-#
-#
-##tools:
-##  scripts_dir: /home/mostafa.abdel/aProjects/Campylobacter/snakemakeProject/Final-Snake-Project/Scripts
-##  multiqc_bin: /home/mostafa.abdel/.local/bin
-##  prokka_bin: /home/software/miniconda3/bin
-#
-##AMR_db:  /data/AGr110/mostafa/ariba_fmt_dbs/ariba_Card
-#VF_db: /data/AGr110/mostafa/ariba_fmt_dbs/ariba_vfdb_core
-#/home/mostafa.abdel/aProjects/Campylobacter/snakemakeProject/Final-Snake-Project/data/micData.txt
-#
-
-##ariba_env: source activate ariba
