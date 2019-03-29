@@ -1,10 +1,14 @@
 #==================================================
 #==========   INPUT data    =======================
 #==================================================
+#export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
+#export PERL5LIB=$PERL5LIB:/home/software/Roary/lib/
+#source ~/.bash_profile
+
 #directories #Dont forget the backslash at the end of the path
 snakemake_folder: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/
-working_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/
-bin_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/bin/
+working_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/
+bin_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/bin/
 raw_data_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
 fasta_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
 #==================================================

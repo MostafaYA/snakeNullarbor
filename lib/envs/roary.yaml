@@ -2,3 +2,4 @@ channels:
   - bioconda
 dependencies:
   - roary =3.12.0
+  - perl-file-slurp =9999.25

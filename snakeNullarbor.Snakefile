@@ -149,8 +149,8 @@ rule fasta_denovo:
         fasta_assembly = expand( results_dir + "{sample}/contigs.fa", sample=GENOMES),
     output:
         denovo = results_dir + "denovo.tab",
-    #conda:
-        #envs_folder + "perl.yaml"
+    conda:
+        envs_folder + "perl.yaml"
     shell:
         "{nullarbor_bin}fa --minsize 500 -e -t {input.fasta} {input.fasta_assembly} | sed 's#results/##g' | tee -a {output.denovo}"
 """
@@ -173,11 +173,10 @@ isolates = [names, names_genomes]
 rule isolates_list:
     output:
         isolates_list= results_dir + "isolates.txt",
-    params:
         tempfile=temp(results_dir + "tempfile",)
     shell:
         '''
-        echo -ne "{isolates}" > {params.tempfile} && bash {bin_dir}fixnames.sh {params.tempfile} > {output.isolates_list}
+        echo -ne "{isolates}" > {output.tempfile} && bash {bin_dir}fixnames.sh {output.tempfile} > {output.isolates_list}
         '''
 #import sys
 #sys.stdout = open('results/isolates.txt', 'w')
@@ -195,8 +194,8 @@ rule seq_yield:
         ref_fasta= results_dir + "ref.fa",
     output:
         seq_yield = results_dir + "{sample}/yield.tab",
-#    conda:
-#        envs_folder + "perl.yaml"
+    conda:
+        envs_folder + "perl.yaml"
     shell:
         "{nullarbor_bin}fq --quiet --ref {input.ref_fasta} {input.r1} {input.r2} > {output.seq_yield}"
 """
@@ -242,14 +241,12 @@ rule prokka:
         prokka_gff= results_dir + "{sample}/prokka/{sample}.gff",
         prokka_gbk= results_dir + "{sample}/prokka/{sample}.gbk",
     threads: 32
-#    log: log_folder + "{sample}/prokka.log"
     conda: envs_folder + "prokka.yaml"
     params:
         prokka_outdir= results_dir + "{sample}/prokka",
         prefix="{sample}",
         strain_name="{sample}",
         locustag= "{sample}",
-        #genustag= config["genustag"],
     shell:
         "prokka --cpus {threads} --force --kingdom Bacteria --outdir {params.prokka_outdir}/ --prefix {params.prefix} --genus {prokka_genustag} --gcode 11 --locustag {params.locustag} --strain {params.strain_name} --centre X --compliant {input.contig} 2>&1 | sed 's/^/[prokka] /' " #--centre X --compliant to generate clean contig names
 rule prokka_ln:
@@ -259,7 +256,6 @@ rule prokka_ln:
     output:
         prokka_gff= results_dir + "{sample}/contigs.gff",
         prokka_gbk= results_dir + "{sample}/contigs.gbk",
-#    conda: envs_folder + "prokka.yaml"
     params:
         prokka_outdir= results_dir + "{sample}/prokka",
     shell:
@@ -276,8 +272,7 @@ rule snippy:
         snippy_snps= results_dir + "{sample}/snippy/snps.tab",
         #snippy_folder=  results_dir + "{sample}",
     threads: 32
-#    log: log_folder + "{sample}/prokka.log"
-#    conda: envs_folder + "prokka.yaml"
+    conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{sample}/snippy",
         #snippy_outdir_cp= results_dir + "{sample}/",
@@ -295,8 +290,7 @@ rule snippy_ln:
         snippy_snps_bai= results_dir + "{sample}/snps.bam.bai",
         snippy_snps_log= results_dir + "{sample}/snps.log",
     threads: 32
-#    log: log_folder + "{sample}/prokka.log"
-#    conda: envs_folder + "prokka.yaml"
+    conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{sample}/snippy",
     shell:
@@ -306,6 +300,7 @@ rule snippy_assemblies:
         contig = fasta_dir + "{genome}.fasta"
     output:
         snippy_snps= results_dir + "{genome}/snippy/snps.tab",
+    conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{genome}/snippy",
     shell:
@@ -336,6 +331,7 @@ rule snippy_core:
         n=expand( results_dir + "{genome}/snps.log", genome=GENOMES),
     output:
         snippycore= results_dir + "core.aln",
+    conda: envs_folder + "snippy.yaml"
     params:
         snippycoreoutdir= results_dir + "core",
         snippy_folders = snippy_folders,
@@ -354,7 +350,7 @@ rule FastTree: #run fasttree
         phylogeny_svg= results_dir + "core.svg"
     threads: 64
     #benchmark: benchmarks_folder + "FastTree.txt"
-    #conda: envs_folder + "FastTree.yaml" #needs revision
+    conda: envs_folder + "FastTree.yaml" #needs revision
     shell:
         "FastTree -nt -gtr {input.snippycore} > {output.phylogeny_tree} && \
         nw_display -S -s -w 1024 -l 'font-size:12;font-family:sans-serif;' -i 'opacity:0' -b 'opacity:0' -v 16 {output.phylogeny_tree}  > {output.phylogeny_svg}"
@@ -398,6 +394,7 @@ rule Roary_svg: #run roary
         acc_svg= results_dir + "roary/acc.svg",
         pan_svg= results_dir + "roary/pan.svg",
     threads: 64
+    conda: envs_folder + "perl.yaml"
     params:
         options=config["roary_params"],
         Roary_dir=results_dir + "Roary"
@@ -415,8 +412,6 @@ rule MLST:
         ref_fasta= results_dir + "ref.fa",
     output:
         mlstresults= results_dir + "mlst.tab",
-    #params:
-        #options= config["MLST_options"],
     conda:
         envs_folder + "mlst.yaml"
     shell:
@@ -429,8 +424,6 @@ rule snpdists:
         snippycore= results_dir + "core.aln",
     output:
         snpdistsresults= results_dir + "distances.tab",
-    #params:
-        #options= config["MLST_options"],
     conda:
         envs_folder + "snpdists.yaml"
     shell:
@@ -466,7 +459,7 @@ rule Nullarbor:
     params:
         nullarborfolder = "report",
     conda:
-        envs_folder + "snpdists.yaml"
+        envs_folder + "perl.yaml"
     shell:
         "cd {results_dir} && {nullarbor_bin}nullarbor-report.pl --name SampleReport --indir . --outdir {params.nullarborfolder}"
         " && mkdir -p $HOME/public_html/MDU/PROJNAME"

@@ -1,0 +1,4 @@
+channels:
+  - bioconda
+dependencies:
+  - snp-dists =0.6.3

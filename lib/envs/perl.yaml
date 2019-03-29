@@ -1,0 +1,20 @@
+channels:
+  - bioconda
+dependencies:
+  - perl-bioperl =1.7.2
+  - perl-time-piece =1.27
+  - perl-list-util =1.38
+  - perl-path-tiny =0.108
+  - perl-yaml-tiny =1.73
+  - perl-moo =2.003004
+  - perl-svg =2.84
+  - perl-text-csv =1.99
+  - perl-list-moreutils =0.428
+  - perl-pathtools =3.73
+  - perl-sys-info =0.7811
+  - perl-file-copy-recursive =0.44
+  - perl-file-path =2.15
+  - perl-file-spec =3.48_01
+  - perl-data-dumper  =2.173 
+  - newick_utils =1.6
+  - perl-file-slurp =9999.25

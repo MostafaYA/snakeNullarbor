@@ -1,0 +1,5 @@
+channels:
+  - bioconda
+dependencies:
+  - snippy =4.3.6
+  - java-jdk=8.0.112
