@@ -50,7 +50,11 @@ if [[ -z $outdir ]]; then outdir=$outdir_default; fi
 fastqdir=`remove_trailing_slash "$fastqdirectory"`
 fastadir=`remove_trailing_slash "$fastadirectory"`
 outdir=`remove_trailing_slash "$outdir"`
-#make the output directory
+#make the output directory, add a timpestamp if the directoy already exists
+#if [[ ! -e $outdir ]]; then mkdir $outdir; fi
+#else outdir="$outdir"_"$(date '+%d%b%Y_%H%M%S')" && mkdir $outdir
+#fi
+
 mkdir -p $outdir
 #first scan the folder for the reads and create error if the reads don't match the required pattern
 CheckSamples=$((ls ${fastqdir}/*.{fastq,fastq.gz,fq,fq.gz,fasta,fna,fa,fsa,fs,fnn} 2> /dev/null | xargs -n 1 basename 2> /dev/null) | awk '{print NF}' | sort | uniq )
