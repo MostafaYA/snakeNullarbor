@@ -7,10 +7,7 @@
 #get to the script directory
 pushd . > /dev/null
 DIR="${BASH_SOURCE[0]}"
-while [ -h "$DIR" ]; do
-  cd "$(dirname "$DIR")"
-  DIR="$(readlink "$(basename "$DIR")")"
-done
+while [ -h "$DIR" ]; do cd "$(dirname "$DIR")"; DIR="$(readlink "$(basename "$DIR")")" ; done
 cd "$(dirname "$DIR")"
 DIR="$(pwd)/"
 popd > /dev/null #SOURCE

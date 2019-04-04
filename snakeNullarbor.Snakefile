@@ -13,10 +13,9 @@ in the MLST rule, results folder in the sed command is hardcoded
 import os
 import tempfile
 configfile: "config.yaml"
-snakefiles = os.path.join(config["snakemake_folder"], "snakefiles/")
-include: snakefiles + "defineFolders.Snakefile"
+#include: snakefiles + "defineFolders.Snakefile"
 #defineFolders
-working_dir=config['working_dir']
+#working_dir=config['working_dir']
 snakemake_folder=config['snakemake_folder']
 raw_data_dir=config['raw_data_dir']
 fasta_dir=config['fasta_dir']
@@ -30,10 +29,11 @@ SAMPLES = set(SAMPLES)
 GENOMES = set(GENOMES)
 DATASET =  [SAMPLES, GENOMES]
 #scripts_paths
-bin_dir=config["bin_dir"],
-lib_dir=config["bin_dir"] + "../lib/"
-nullarbor_bin=config["bin_dir"] + "../lib/nullarbor/bin/"
-envs_folder=config["bin_dir"] + "../lib/envs/"
+bin_dir= snakemake_folder + "bin/",
+lib_dir= snakemake_folder + "lib/"
+nullarbor_bin= snakemake_folder + "lib/nullarbor/bin/"
+#envs_folder=config["bin_dir"] + "../lib/envs/"
+envs_folder="lib/envs/"
 #variables
 if "AMR_db_abricate" in config:
     AMR_db_abricate= config["AMR_db_abricate"]
@@ -47,6 +47,10 @@ if "prokka_genustag" in config:
     prokka_genustag= config["prokka_genustag"]
 else:
     prokka_genustag= ""
+if "prokka_params" in config:
+    prokka_params= config["prokka_params"]
+else:
+    prokka_params= ""
 #mlst_parameters
 if "MLST_options" in config:
     MLST_options= config["MLST_options"]
@@ -59,8 +63,8 @@ reference= config["reference"]
 
 rule all:
     input:
-        #seq_yield = expand(  results_dir + "{sample}/yield.tab", sample=SAMPLES),
-        #Assembly =expand( results_dir + "{sample}/contigs.fa", sample=SAMPLES),
+        seq_yield = expand(  results_dir + "{sample}/yield.tab", sample=SAMPLES),
+        Assembly =expand( results_dir + "{sample}/contigs.fa", sample=SAMPLES),
         kraken_tab= expand(results_dir + "{sample}/kraken.tab", sample=SAMPLES),
         kraken_tab_assemblies= expand(results_dir + "{genome}/kraken.tab", genome=GENOMES),
         virulome =expand( results_dir + "{sample}/virulome.tab", sample=SAMPLES),
@@ -72,8 +76,8 @@ rule all:
         #prokka_assemblies_gff= expand( results_dir + "{genome}/prokka/{genome}.gff", genome=GENOMES),
         isolates_list= results_dir + "isolates.txt",
         denovo = results_dir + "denovo.tab",
-        #snippy_snps= expand( results_dir + "{sample}/snippy/snps.tab", sample=SAMPLES),
-        #snippy_snps_assemblies= expand( results_dir + "{genome}/snippy/snps.tab", genome=GENOMES),
+        snippy_snps= expand( results_dir + "{sample}/snippy/snps.tab", sample=SAMPLES),
+        snippy_snps_assemblies= expand( results_dir + "{genome}/snippy/snps.tab", genome=GENOMES),
         snippycore= results_dir + "core.aln",
         Roary= results_dir + "roary/pan_genome_reference.fa",
         phylogeny_tree= results_dir + "core.newick",
@@ -88,12 +92,12 @@ collect assemblies
 rule collect_assemblies:
     input:
         assemblies = fasta_dir + "{genome}.fasta",
-        yield_na = config["bin_dir"] + "../lib/yield.tab"
+        yield_na = lib_dir + "yield.tab"
     output:
         contig = results_dir + "{genome}/contigs.fa",
         contig_yield = results_dir + "{genome}/yield.tab",
     shell:
-        "ln -s -f {input.assemblies} {output.contig} && cp -v -f {input.yield_na} {output.contig_yield}"
+        "ln -s -f {input.assemblies} {output.contig} && cp -v -f {input.yield_na} {output.contig_yield}" #bash {bin_dir}fa_rename.sh
 """
 assembly
 """
@@ -101,7 +105,6 @@ rule assembly:
     input:
         r1 = raw_data_dir + "{sample}_R1.fastq.gz",
         r2 = raw_data_dir + "{sample}_R2.fastq.gz",
-        bin_dir=config["bin_dir"],
     output:
         contig = results_dir + "{sample}/contigs.fa",
     threads: 16 #increasing threads produces errors with spades
@@ -111,7 +114,7 @@ rule assembly:
         assembler = assembler_options,
         assembly_dir = directory (results_dir + "{sample}")
     shell:
-        "bash {input.bin_dir}assembly.sh -a {assembler} --R1 {input.r1} --R2 {input.r2} -o {output.contig} -d {params.assembly_dir}/{assembler}  -p {threads}" #-t trimmomatic -f true
+        "bash {bin_dir}assembly.sh -a {assembler} --R1 {input.r1} --R2 {input.r2} -o {output.contig} -d {params.assembly_dir}/{assembler}  -p {threads} -f true " #-t trimmomatic
 """
 kraken
 """
@@ -236,7 +239,6 @@ Prokka
 rule prokka:
     input:
         contig= results_dir + "{sample}/contigs.fa",
-        #assemblies = results_dir + "{genome}/contigs.fa",
     output:
         prokka_gff= results_dir + "{sample}/prokka/{sample}.gff",
         prokka_gbk= results_dir + "{sample}/prokka/{sample}.gbk",
@@ -248,7 +250,7 @@ rule prokka:
         strain_name="{sample}",
         locustag= "{sample}",
     shell:
-        "prokka --cpus {threads} --force --kingdom Bacteria --outdir {params.prokka_outdir}/ --prefix {params.prefix} --genus {prokka_genustag} --gcode 11 --locustag {params.locustag} --strain {params.strain_name} --centre X --compliant {input.contig} 2>&1 | sed 's/^/[prokka] /' " #--centre X --compliant to generate clean contig names
+        "prokka --cpus {threads} --force --kingdom Bacteria --outdir {params.prokka_outdir}/ --prefix {params.prefix} --genus {prokka_genustag} --gcode 11 --locustag {params.locustag} --strain {params.strain_name} {prokka_params} {input.contig} 2>&1 | sed 's/^/[prokka] /' " #--centre Institute --compliant to generate clean contig names
 rule prokka_ln:
     input:
         prokka_gff= results_dir + "{sample}/prokka/{sample}.gff",
@@ -361,7 +363,7 @@ Roary
 #export PERL5LIB=$PERL5LIB:/home/software/Roary/lib/
 rule Roary: #run roary
     input:
-        bin_dir=config["bin_dir"],
+        #bin_dir=config["bin_dir"],
         prokka_gff= expand(results_dir + "{sample}/prokka/{sample}.gff", sample=SAMPLES),
         prokka_assemblies_gff= expand(results_dir + "{genome}/prokka/{genome}.gff", genome=GENOMES),
     output:
@@ -377,16 +379,15 @@ rule Roary: #run roary
         options=config["roary_params"],
         Roary_dir=results_dir + "roary"
     shell:
-        "bash {input.bin_dir}fixRoaryOutDirError.sh {params.Roary_dir} {output.tmp_dir}"
+        "bash {bin_dir}fixRoaryOutDirError.sh {params.Roary_dir} {output.tmp_dir}"
         " && roary -p {threads} -f {params.Roary_dir} {params.options} {input.prokka_gff} {input.prokka_assemblies_gff} 2>&1 | sed 's/^/[roary] /' | tee -a {log}" #-e, core genes alignment using PRANK, -r, Rplots ,
         # sometimes you may need to set -i (minimum percentage identity for blastp) and -s (dont split paralogs), according to the organism
-        " && python3.5 {input.bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        " && python3.5 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
         " && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
 
 #source ~/.bash_profile SVG.pm
 rule Roary_svg: #run roary
     input:
-        bin_dir=config["bin_dir"],
         roary_pangenome_fa= results_dir + "roary/pan_genome_reference.fa",
         roary_presenceabsence= results_dir + "roary/gene_presence_absence.csv",
         roary_acc= results_dir + "roary/accessory_binary_genes.fa.newick",
@@ -440,7 +441,6 @@ rule Nullarbor:
         resistome =expand( results_dir + "{sample}/resistome.tab", sample=SAMPLES),
         resistome_assemblies =expand( results_dir + "{genome}/resistome.tab", genome=GENOMES),
         contig = expand(  results_dir + "{genome}/contigs.fa", genome=GENOMES),
-        #prokka_gff= expand(results_dir + "{sample}/prokka/{sample}.gff", sample=SAMPLES),
         prokka_gff= expand(results_dir + "{sample}/contigs.gff", sample=SAMPLES),
         prokka_assemblies_gff= expand(results_dir + "{genome}/contigs.gff",  genome=GENOMES),
         #prokka_assemblies_gff= expand( results_dir + "{genome}/prokka/{genome}.gff", genome=GENOMES),

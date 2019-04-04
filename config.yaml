@@ -6,11 +6,9 @@
 #source ~/.bash_profile
 
 #directories #Dont forget the backslash at the end of the path
-snakemake_folder: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/
-working_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/
-bin_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/bin/
-raw_data_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
-fasta_dir: /home/mostafa.abdel/aProjects/snakeNullarbor/snakeNullarbor/input/
+snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/
+raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #should be the full path
+fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/
 #==================================================
 #==========   SOFTWARE settings    ================
 #==================================================
@@ -20,27 +18,30 @@ trimmer: trimmomatic
 assembler: shovill #choose between [shovill spades megahit sksea]
 assembler_options: --trim
 filter: yes
-reference: /home/mostafa.abdel/aProjects/snakeNullarbor/NZ_LS483362.1.gbk
-#spades: spades
+reference: /home/mostafa.abdel/dataAGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk
+#Resistance and virulence dbs
 AMR_db_abricate: ncbi
 VF_db_abricate:  vfdb
 #prokka
-prokka_genustag: Campylobacter
-
+prokka_genustag: bacillus
+prokka_params: --mincontiglen 500 --gram pos --fast --norrna --notrna
 #Pangenome
 roary_params: -e -n -r -v #-e, core genes alignment using PRANK, -n using mafft, -r for Rplots, # sometimes you may need to set -i (percentage identity for blastp) and -s (dont split paralogs), according to the organism
-
 #assembly_options
 #shovill_assembler: --assembler spades #choose between [spades megahit sksea]
 #shovill_options: --trim #choose between different shovill parameters [--trim --noreadcorr --nostitch --nocorr --minlen 500 --mincov 5 --keepfiles ] #--depth 0 to disable the Sub-sampling of the reads to 100
 #MLST_options: --scheme campylobacter #choose/exclude MLST schemes [--scheme ypseudotuberculosis --exclude campylobacter,yersinia]
-#prokka_genustag: --genus campylobacter
-
-
 #==================================================
 #==========   DATABASES settings    ===============
 #==================================================
-#     (The path to databases must be adapted)
+#databases (The path to databases must be adapted)
+kraken: /home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB
 #==================================================
-#database
-kraken: /home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB #scan fasta files against this database (could also be minikrakendb)
+#==========  Pathogen specific rule settings ======
+#==================================================
+#plasmids Bacillus anthracis
+pathogen_specific_db: bacillus_anthracis_plasmids_db
+pathogen_specific_output: plasmid.tab
+#
+#
+#
