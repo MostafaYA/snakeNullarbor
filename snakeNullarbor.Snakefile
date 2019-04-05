@@ -449,7 +449,7 @@ snpdists
 rule snpdists:
     input:
         snippycore= results_dir + "core.aln",
-    output:fucks up with
+    output:
         snpdistsresults= results_dir + "distances.tab",
     conda:
         envs_folder + "snpdists.yaml"
