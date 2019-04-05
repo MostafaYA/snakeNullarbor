@@ -2,3 +2,4 @@ channels:
   - bioconda
 dependencies:
   - fasttree =2.1.10
+  - newick_utils =1.6

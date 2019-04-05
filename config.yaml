@@ -24,7 +24,7 @@ AMR_db_abricate: ncbi
 VF_db_abricate:  vfdb
 #prokka
 prokka_genustag: bacillus
-prokka_params: --mincontiglen 500 --gram pos --fast --norrna --notrna
+prokka_params: --mincontiglen 500 --fast --norrna --notrna
 #Pangenome
 roary_params: -e -n -r -v #-e, core genes alignment using PRANK, -n using mafft, -r for Rplots, # sometimes you may need to set -i (percentage identity for blastp) and -s (dont split paralogs), according to the organism
 #assembly_options

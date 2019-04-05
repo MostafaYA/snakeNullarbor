@@ -1,14 +1,25 @@
 """----------------------------
 Friedrich-Loeffler-Institut (https://www.fli.de/), IBIZ
 date: March, 20, 2019
-Author: Mostafa Abdel-Glil (mostafa.abdel-glil@fli.de)
+Author: Mostafa Abdel-Glil (mostafa.abdelglil@fli.de)
 -------------------------------
 This is an attempt to produce the nullarbor report (https://github.com/tseemann/nullarbor) using snakemake (https://snakemake.readthedocs.io/en/stable/), hence the name `snakeNullarbor`
 -------------------------------
 # TODO:
-isolates.txt
-put reference as reference.fasta and provide as a genome
-in the MLST rule, results folder in the sed command is hardcoded
+* isolates.txt, use python code to prepare it nicely
+* in the MLST and snp-dists rule, results folder in the sed command is hardcoded
+
+Assembly
+* assembler_options =config["assembler_options"] ---snake variable and rule
+* -opts {params.assembler} options does not wotŕk in the bash --- bash
+ * shovill --outdir $OUTDIR --cpus $THREADS --R1 $READ1 --R2 $READ2 --force --ram 10 $assembler_options $assembler_options_additional
+
+Prokka
+* --gram pos can not be used, no `signalp` in conda
+
+Nullarbor
+* remove the tools versions in nullarbor and make it read from the envs folder
+* export KRAKEN_DEFAULT_DB=/home/mostafa.abdel/dbs/miniKraken/minikraken_20171013_4GB for DBs, or better read from the config file
 """
 import os
 import tempfile
@@ -80,6 +91,7 @@ rule all:
         snippy_snps_assemblies= expand( results_dir + "{genome}/snippy/snps.tab", genome=GENOMES),
         snippycore= results_dir + "core.aln",
         Roary= results_dir + "roary/pan_genome_reference.fa",
+        Roary_dir=results_dir + "roary/pangenome_frequency.png",
         phylogeny_tree= results_dir + "core.newick",
         pan_svg= results_dir + "roary/pan.svg",
         mlstresults= results_dir + "mlst.tab",
@@ -96,8 +108,10 @@ rule collect_assemblies:
     output:
         contig = results_dir + "{genome}/contigs.fa",
         contig_yield = results_dir + "{genome}/yield.tab",
+    conda:
+        envs_folder + "bioawk.yaml" #spades, sickle
     shell:
-        "ln -s -f {input.assemblies} {output.contig} && cp -v -f {input.yield_na} {output.contig_yield}" #bash {bin_dir}fa_rename.sh
+        "bash {bin_dir}fa_rename.sh {input.assemblies} {output.contig} && cp -v -f {input.yield_na} {output.contig_yield}" #ln -s -f ##* Prokka does not like contigs ID > 37, '--centre X --compliant' is not the way always
 """
 assembly
 """
@@ -279,7 +293,7 @@ rule snippy:
         snippy_outdir= results_dir + "{sample}/snippy",
         #snippy_outdir_cp= results_dir + "{sample}/",
     shell:
-        "snippy --force  --cpus {threads} --outdir {params.snippy_outdir} --ref {reference} --R1 {input.r1} --R2 {input.r2} 2>&1 | sed 's/^/[snippy] /'"
+        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --R1 {input.r1} --R2 {input.r2} 2>&1 | sed 's/^/[snippy] /'"
 rule snippy_ln:
     input:
         snippy_snps= results_dir + "{sample}/snippy/snps.tab",
@@ -306,7 +320,7 @@ rule snippy_assemblies:
     params:
         snippy_outdir= results_dir + "{genome}/snippy",
     shell:
-        "snippy --force  --cpus {threads} --outdir {params.snippy_outdir} --ref {reference} --ctgs {input.contig}  2>&1 | sed 's/^/[snippy] /'"
+        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --ctgs {input.contig}  2>&1 | sed 's/^/[snippy] /'"
 
 def snippy_folders(wildcards):
     return expand(results_dir + "{sample}", sample=SAMPLES)
@@ -382,9 +396,21 @@ rule Roary: #run roary
         "bash {bin_dir}fixRoaryOutDirError.sh {params.Roary_dir} {output.tmp_dir}"
         " && roary -p {threads} -f {params.Roary_dir} {params.options} {input.prokka_gff} {input.prokka_assemblies_gff} 2>&1 | sed 's/^/[roary] /' | tee -a {log}" #-e, core genes alignment using PRANK, -r, Rplots ,
         # sometimes you may need to set -i (minimum percentage identity for blastp) and -s (dont split paralogs), according to the organism
-        " && python3.5 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        #" && python3 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        #" && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
+rule Roary_plots:
+    input:
+        roary_presenceabsence= results_dir + "roary/gene_presence_absence.csv",
+        roary_acc= results_dir + "roary/accessory_binary_genes.fa.newick",
+    output:
+        Roary_dir=results_dir + "roary/pangenome_frequency.png"
+    conda: envs_folder + "roary_plots.yaml"
+    params:
+        #options=config["roary_params"],
+        Roary_dir=results_dir + "roary"
+    shell:
+        " python3 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
         " && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
-
 #source ~/.bash_profile SVG.pm
 rule Roary_svg: #run roary
     input:
@@ -423,7 +449,7 @@ snpdists
 rule snpdists:
     input:
         snippycore= results_dir + "core.aln",
-    output:
+    output:fucks up with
         snpdistsresults= results_dir + "distances.tab",
     conda:
         envs_folder + "snpdists.yaml"
