@@ -1,12 +1,14 @@
 """----------------------------
 Friedrich-Loeffler-Institut (https://www.fli.de/), IBIZ
 date: March, 20, 2019
-Author: Mostafa Abdel-Glil (mostafa.abdelglil@fli.de)
+Author: Mostafa Abdel-Glil (mostafa.abdel-glil@fli.de)
 -------------------------------
 This is an attempt to produce the nullarbor report (https://github.com/tseemann/nullarbor) using snakemake (https://snakemake.readthedocs.io/en/stable/), hence the name `snakeNullarbor`
 -------------------------------
+
 # TODO:
 * isolates.txt, use python code to prepare it nicely
+* make the log files more nice and clear
 * in the MLST and snp-dists rule, results folder in the sed command is hardcoded
 
 Assembly
@@ -409,7 +411,7 @@ rule Roary_plots:
         #options=config["roary_params"],
         Roary_dir=results_dir + "roary"
     shell:
-        " python3 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        " python3.5 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
         " && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
 #source ~/.bash_profile SVG.pm
 rule Roary_svg: #run roary

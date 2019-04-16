@@ -13,7 +13,7 @@ use Path::Tiny;
 use File::Copy;
 
 #-------------------------------------------------------------------
-# local modules 
+# local modules
 
 use FindBin;
 use lib "$FindBin::RealBin/../perl5";
@@ -43,14 +43,14 @@ my $preview = 0;
 
 GetOptions(
   "help"     => \&usage,
-  "version"  => \&version, 
+  "version"  => \&version,
   "verbose"  => \$verbose,
   "quiet"    => \$quiet,
   "name=s"   => \$name,
   "indir=s"  => \$indir,
   "outdir=s" => \$outdir,
   "preview"  => \$preview,
-) 
+)
 or usage();
 
 #.................................................................................
@@ -79,7 +79,7 @@ else {
 }
 
 #-------------------------------------------------------------------
-# main() 
+# main()
 
 my @ids = path("$indir/isolates.txt")->lines({chomp=>1});
 msg("Identified", scalar(@ids), "isolates.");
@@ -93,7 +93,7 @@ push @html, "<h1>$name</h1>\n";
 
 my @section = qw(jobinfo seqdata identification mlst serotype resistome virulome
                  assembly reference core phylotree snpdist snpdensity pan
-                 tools databases about);
+                  about); #tools databases
 
 if ($preview) {
   @section = qw(jobinfo mashtree about);
@@ -167,4 +167,3 @@ sub version {
   print "$EXE $VERSION\n";
   exit;
 }
-

@@ -6,9 +6,9 @@
 #source ~/.bash_profile
 
 #directories #Dont forget the backslash at the end of the path
-snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/
-raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/
-fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/
+snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/
+raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #should be the full path
+fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/
 #==================================================
 #==========   SOFTWARE settings    ================
 #==================================================
@@ -18,7 +18,7 @@ trimmer: trimmomatic
 assembler: shovill #choose between [shovill spades megahit sksea]
 assembler_options: --trim
 filter: yes
-reference: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/data_example/Amesancestor.gbk #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/data_example/NZ_LS483362.1.gbk #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/data_example/NZ_LS483362.1.gbk #/home/mostafa.abdel/dataAGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk
+reference: /home/mostafa.abdel/dataAGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk
 #Resistance and virulence dbs
 AMR_db_abricate: ncbi
 VF_db_abricate:  vfdb
@@ -35,7 +35,7 @@ roary_params: -e -n -r -v #-e, core genes alignment using PRANK, -n using mafft,
 #==========   DATABASES settings    ===============
 #==================================================
 #databases (The path to databases must be adapted)
-kraken: /home/DB_RAM/KrakenDB #/home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #
+kraken: /home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB
 #==================================================
 #==========  Pathogen specific rule settings ======
 #==================================================

@@ -54,7 +54,7 @@ while [ "$1" != "" ]; do
 done
 #if [ $# -lt 1 ]; then usage; exit  ; fi
 if [[ -z $READ1 ]] && [[ -z $READ2 ]] ; then error_exit "Reads are required. use --R1 and --R2" ; fi
-if [[ -z $READ1 ]] | [[ -z $READ2 ]] ; then error_exit "Reads are required. use --R1 and --R2" ; fi
+if [[ -z $READ1 ]] || [[ -z $READ2 ]] ; then error_exit "Reads are required. use --R1 and --R2" ; fi
 if [[ -z $assembler ]]; then assembler=$assembler_default; fi
 if [[ -z $OUTDIR ]]; then OUTDIR=$assembler; fi
 if [[ -z $CONTIGSoutput ]]; then CONTIGSoutput=$CONTIGSoutput_default; fi
