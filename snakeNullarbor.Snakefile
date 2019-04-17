@@ -411,7 +411,7 @@ rule Roary_plots:
         #options=config["roary_params"],
         Roary_dir=results_dir + "roary"
     shell:
-        " python3.5 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        " python3 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
         " && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
 #source ~/.bash_profile SVG.pm
 rule Roary_svg: #run roary
