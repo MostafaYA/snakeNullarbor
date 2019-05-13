@@ -1,0 +1,1283 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- The above 3 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+    <title>Nullarbor</title>
+
+    <!-- Bootstrap -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Optional theme -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" rel="stylesheet">
+
+    <!-- Datatables -->
+    <link href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" rel="stylesheet">
+
+    <!-- LOCAL STYLE -->
+    <link href="nullarbor.css" rel="stylesheet">
+
+    <!-- Graphing library -->
+    <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+  <body>
+
+<!--
+<nav class='navbar navbar-inverse navbar-static-top'>
+  <div class='container'>
+    <p class='navbar-brand'>
+Nullarbor
+    </p>
+    <p class='navbar-text navbar-right'>Torsten Seemann</p>
+  </div>
+</nav>
+-->
+
+<div class='container-fluid'>
+<h1>SampleReport</h1>
+<div class='container-fluid nullarbor-section' id='jobinfo'>
+<a name='jobinfo'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Report summary <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<table id='jobinfo' class='table table-bordered table-condensed'>
+<thead>
+<tr>
+<th>Isolates
+<th>Author
+<th>Date
+<th>Host
+<th>Folder
+</thead>
+<tbody>
+<tr>
+<td>4
+<td><tt>mostafa.abdel</tt>
+<td>Tue Apr 16 19:20:57 2019
+<td><tt>je-seq160020.intern.fli.bund.local</tt>
+<td><tt>/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/results</tt>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='jobinfo.csv' class='file-download'>&#11015;jobinfo.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='seqdata'>
+<a name='seqdata'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Sequence data <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='&ge;50x '>&#10004;</span> &ge;50x </SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='&ge;25x'>?</span> &ge;25x</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='<25x'>&#10008;</span> <25x</SPAN>
+
+</SPAN>
+<table id='seqdata' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>Reads
+<th>Yield
+<th>GeeCee
+<th>MinLen
+<th>AvgLen
+<th>MaxLen
+<th>ModeLen
+<th>Phred
+<th>AvgQual
+<th>Depth
+<th>Quality
+</thead>
+<tbody>
+<tr>
+<td>SRR2968133
+<td>1183986
+<td>356379786
+<td>37.0
+<td>301
+<td>301
+<td>301
+<td>301
+<td>33
+<td>33.0
+<td>63
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR1999417
+<td>5396224
+<td>1047950350
+<td>37.9
+<td>35
+<td>194
+<td>251
+<td>251
+<td>33
+<td>36.9
+<td>187
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968135
+<td>4859830
+<td>1462808830
+<td>35.2
+<td>301
+<td>301
+<td>301
+<td>301
+<td>33
+<td>35.5
+<td>261
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>ref_strain
+<td>na
+<td>na
+<td>na
+<td>na
+<td>na
+<td>na
+<td>na
+<td>na
+<td>na
+<td>0
+<td><span class='traffic-light fail'>&#10008;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='seqdata.csv' class='file-download'>&#11015;seqdata.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='identification'>
+<a name='identification'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Species identification <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='&ge;80%'>&#10004;</span> &ge;80%</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='&ge;65%'>?</span> &ge;65%</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='<65%'>&#10008;</span> <65%</SPAN>
+
+</SPAN>
+<table id='identification' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>#1 Match
+<th>%
+<th>#2 Match
+<th>%
+<th>#3 Match
+<th>%
+<th>#4 Match
+<th>%
+<th>Quality
+</thead>
+<tbody>
+<tr>
+<td>SRR2968133
+<td><SPAN STYLE='color: black;'><span class='binomial'>Bacillus anthracis</span></SPAN>
+<td><SPAN STYLE='color: black;'>31.49</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus cereus</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.87</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Alteromonas mediterranea</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.60</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus thuringiensis</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.54</SPAN>
+<td><span class='traffic-light fail'>&#10008;</span>
+<tr>
+<td>SRR1999417
+<td><SPAN STYLE='color: black;'><span class='binomial'>Bacillus anthracis</span></SPAN>
+<td><SPAN STYLE='color: black;'>31.11</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>unclassified</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.30</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus cereus</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.26</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus thuringiensis</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.19</SPAN>
+<td><span class='traffic-light fail'>&#10008;</span>
+<tr>
+<td>SRR2968135
+<td><SPAN STYLE='color: black;'><span class='binomial'>Bacillus anthracis</span></SPAN>
+<td><SPAN STYLE='color: black;'>47.21</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus cereus</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.59</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Bacillus thuringiensis</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.36</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>Alteromonas mediterranea</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.13</SPAN>
+<td><span class='traffic-light fail'>&#10008;</span>
+<tr>
+<td>ref_strain
+<td><SPAN STYLE='color: black; font-weight: bold;'><span class='binomial'>Bacillus anthracis</span></SPAN>
+<td><SPAN STYLE='color: black; font-weight: bold;'>100.00</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>unclassified</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>0.00</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>None</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>-</SPAN>
+<td><SPAN STYLE='color: lightgray;'><span class='binomial'>None</span></SPAN>
+<td><SPAN STYLE='color: lightgray;'>-</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='identification.csv' class='file-download'>&#11015;identification.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='mlst'>
+<a name='mlst'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+MLST <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<table id='mlst' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>Scheme
+<th>Sequence<BR>Type
+<th>Allele
+<th>Allele
+<th>Allele
+<th>Allele
+<th>Allele
+<th>Allele
+<th>Allele
+<th>Quality
+</thead>
+<tbody>
+<tr>
+<td>Reference
+<td>bcereus
+<td>1
+<td><SPAN CLASS='allele known'>glp(1)</SPAN>
+<td><SPAN CLASS='allele known'>gmk(1)</SPAN>
+<td><SPAN CLASS='allele known'>ilv(1)</SPAN>
+<td><SPAN CLASS='allele known'>pta(1)</SPAN>
+<td><SPAN CLASS='allele known'>pur(1)</SPAN>
+<td><SPAN CLASS='allele known'>pyc(1)</SPAN>
+<td><SPAN CLASS='allele known'>tpi(1)</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968133
+<td>bcereus
+<td>1
+<td><SPAN CLASS='allele known'>glp(1)</SPAN>
+<td><SPAN CLASS='allele known'>gmk(1)</SPAN>
+<td><SPAN CLASS='allele known'>ilv(1)</SPAN>
+<td><SPAN CLASS='allele known'>pta(1)</SPAN>
+<td><SPAN CLASS='allele known'>pur(1)</SPAN>
+<td><SPAN CLASS='allele known'>pyc(1)</SPAN>
+<td><SPAN CLASS='allele known'>tpi(1)</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR1999417
+<td>bcereus
+<td>1
+<td><SPAN CLASS='allele known'>glp(1)</SPAN>
+<td><SPAN CLASS='allele known'>gmk(1)</SPAN>
+<td><SPAN CLASS='allele known'>ilv(1)</SPAN>
+<td><SPAN CLASS='allele known'>pta(1)</SPAN>
+<td><SPAN CLASS='allele known'>pur(1)</SPAN>
+<td><SPAN CLASS='allele known'>pyc(1)</SPAN>
+<td><SPAN CLASS='allele known'>tpi(1)</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968135
+<td>bcereus
+<td>2
+<td><SPAN CLASS='allele known'>glp(1)</SPAN>
+<td><SPAN CLASS='allele known'>gmk(1)</SPAN>
+<td><SPAN CLASS='allele known'>ilv(2)</SPAN>
+<td><SPAN CLASS='allele known'>pta(1)</SPAN>
+<td><SPAN CLASS='allele known'>pur(1)</SPAN>
+<td><SPAN CLASS='allele known'>pyc(2)</SPAN>
+<td><SPAN CLASS='allele known'>tpi(1)</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>ref_strain
+<td>bcereus
+<td>1
+<td><SPAN CLASS='allele known'>glp(1)</SPAN>
+<td><SPAN CLASS='allele known'>gmk(1)</SPAN>
+<td><SPAN CLASS='allele known'>ilv(1)</SPAN>
+<td><SPAN CLASS='allele known'>pta(1)</SPAN>
+<td><SPAN CLASS='allele known'>pur(1)</SPAN>
+<td><SPAN CLASS='allele known'>pyc(1)</SPAN>
+<td><SPAN CLASS='allele known'>tpi(1)</SPAN>
+<td><span class='traffic-light pass'>&#10004;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='mlst.csv' class='file-download'>&#11015;mlst.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='resistome'>
+<a name='resistome'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Resistome <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='&ge;95% coverage'>&#10004;</span> &ge;95% coverage</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='<95% coverage'>?</span> <95% coverage</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='absent'>&#10008;</span> absent</SPAN>
+
+</SPAN>
+<table id='resistome' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>Found
+<th><DIV CLASS='vertical'>bla</DIV>
+<th><DIV CLASS='vertical'>bla2</DIV>
+<th><DIV CLASS='vertical'>fosB</DIV>
+<th><DIV CLASS='vertical'>fosB2</DIV>
+<th><DIV CLASS='vertical'>lsa(B)</DIV>
+<th><DIV CLASS='vertical'>mph(B)</DIV>
+<th><DIV CLASS='vertical'>vanR</DIV>
+<th><DIV CLASS='vertical'>vanZ-F</DIV>
+</thead>
+<tbody>
+<tr>
+<td>SRR2968133
+<td>8
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='94%'>?</span>
+<tr>
+<td>SRR1999417
+<td>8
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='94%'>?</span>
+<tr>
+<td>SRR2968135
+<td>8
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='94%'>?</span>
+<tr>
+<td>ref_strain
+<td>8
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='94%'>?</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='resistome.csv' class='file-download'>&#11015;resistome.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='virulome'>
+<a name='virulome'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Virulome <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='&ge;95% coverage'>&#10004;</span> &ge;95% coverage</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='<95% coverage'>?</span> <95% coverage</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='. absent'>&#10008;</span> . absent</SPAN>
+
+</SPAN>
+<table id='virulome' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>Found
+<th><DIV CLASS='vertical'>BAS3109</DIV>
+<th><DIV CLASS='vertical'>capA</DIV>
+<th><DIV CLASS='vertical'>capB</DIV>
+<th><DIV CLASS='vertical'>capC</DIV>
+<th><DIV CLASS='vertical'>capE</DIV>
+<th><DIV CLASS='vertical'>clpC</DIV>
+<th><DIV CLASS='vertical'>cpsB</DIV>
+<th><DIV CLASS='vertical'>cya</DIV>
+<th><DIV CLASS='vertical'>dep/capD</DIV>
+<th><DIV CLASS='vertical'>hasC</DIV>
+<th><DIV CLASS='vertical'>inhA</DIV>
+<th><DIV CLASS='vertical'>lef</DIV>
+<th><DIV CLASS='vertical'>nheA</DIV>
+<th><DIV CLASS='vertical'>nheB</DIV>
+<th><DIV CLASS='vertical'>nheC</DIV>
+<th><DIV CLASS='vertical'>pagA</DIV>
+</thead>
+<tbody>
+<tr>
+<td>SRR2968133
+<td>16
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='80%'>?</span>
+<td><span class='traffic-light dunno' title='18%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='22%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR1999417
+<td>16
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='80%'>?</span>
+<td><span class='traffic-light dunno' title='18%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='22%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968135
+<td>16
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='80%'>?</span>
+<td><span class='traffic-light dunno' title='18%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='22%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>ref_strain
+<td>15
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='80%'>?</span>
+<td>.
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light dunno' title='22%'>?</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+<td><span class='traffic-light pass'>&#10004;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='virulome.csv' class='file-download'>&#11015;virulome.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='assembly'>
+<a name='assembly'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Assembly and annotation <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='Typical'>&#10004;</span> Typical</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='&mu;<SUB>Contigs</SUB>=33 &and; &mu;<SUB>bp</SUB>=5471368'>?</span> &mu;<SUB>Contigs</SUB>=33 &and; &mu;<SUB>bp</SUB>=5471368</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='Contigs &gt; 1.5&mu; &or; bp &plusmn; 0.2&mu;'>&#10008;</span> Contigs &gt; 1.5&mu; &or; bp &plusmn; 0.2&mu;</SPAN>
+
+</SPAN>
+<table id='assembly' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>Contigs
+<th>bp
+<th>ok
+<th>Ns
+<th>gaps
+<th>min
+<th>avg
+<th>max
+<th>N50
+<th>CDS
+<th>rRNA
+<th>tRNA
+<th>tmRNA
+<th>Quality
+</thead>
+<tbody>
+<tr>
+<td>SRR1999417
+<td>37
+<td>5458336
+<td>5458336
+<td>0
+<td>0
+<td>517
+<td>147522
+<td>1770068
+<td>403174
+<td>5724
+<td>
+<td>
+<td>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968133
+<td>60
+<td>5465531
+<td>5465531
+<td>0
+<td>0
+<td>553
+<td>91092
+<td>843305
+<td>260910
+<td>5737
+<td>
+<td>
+<td>
+<td><span class='traffic-light fail'>&#10008;</span>
+<tr>
+<td>SRR2968135
+<td>33
+<td>5457679
+<td>5457679
+<td>0
+<td>0
+<td>517
+<td>165384
+<td>1769614
+<td>831732
+<td>5741
+<td>
+<td>
+<td>
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>ref_strain
+<td>3
+<td>5503926
+<td>5503926
+<td>0
+<td>0
+<td>94830
+<td>1834642
+<td>5227419
+<td>5227419
+<td>5755
+<td>
+<td>
+<td>
+<td><span class='traffic-light pass'>&#10004;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='assembly.csv' class='file-download'>&#11015;assembly.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='reference'>
+<a name='reference'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Reference genome <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<table id='reference' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Sequence
+<th>Length
+<th>Description
+</thead>
+<tbody>
+<tr>
+<td>AE017334
+<td>5227419
+<td>AE017334 Bacillus anthracis str. 'Ames Ancestor', complete genome.
+<tr>
+<td>AE017335
+<td>94830
+<td>AE017335 Bacillus anthracis str. 'Ames Ancestor' plasmid pXO2, complete sequence.
+<tr>
+<td>AE017336
+<td>181677
+<td>AE017336 Bacillus anthracis str. 'Ames Ancestor' plasmid pXO1, complete sequence.
+<tr>
+<td>TOTAL
+<td>5503926
+<td>Total reference size in bp
+</tbody><caption><span class='file-download-bar'>Download:  <a href='reference.csv' class='file-download'>&#11015;reference.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='core'>
+<a name='core'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Core genome <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<SPAN CLASS='legend'>
+<B>Legend:</B>
+<SPAN CLASS='legend-item'><span class='traffic-light pass' title='&ge;90% used'>&#10004;</span> &ge;90% used</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light dunno' title='&ge;70% used'>?</span> &ge;70% used</SPAN>
+<SPAN CLASS='legend-item'><span class='traffic-light fail' title='<70% used'>&#10008;</span> <70% used</SPAN>
+
+</SPAN>
+<table id='core' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>Isolate
+<th>LENGTH
+<th>ALIGNED
+<th>UNALIGNED
+<th>VARIANT
+<th>HET
+<th>MASKED
+<th>LOWCOV
+<th>%Used
+<th>Quality
+</thead>
+<tbody>
+<tr>
+<td>SRR1999417
+<td>5503926
+<td>5447725
+<td>51752
+<td>408
+<td>1852
+<td>0
+<td>2597
+<td>98.98
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>SRR2968133
+<td>5503926
+<td>2553299
+<td>66296
+<td>122
+<td>159
+<td>0
+<td>2884172
+<td>46.39
+<td><span class='traffic-light fail'>&#10008;</span>
+<tr>
+<td>SRR2968135
+<td>5503926
+<td>5452926
+<td>49983
+<td>198
+<td>207
+<td>0
+<td>810
+<td>99.07
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>ref_strain
+<td>5503926
+<td>5439951
+<td>57287
+<td>0
+<td>0
+<td>0
+<td>6688
+<td>98.84
+<td><span class='traffic-light pass'>&#10004;</span>
+<tr>
+<td>Reference
+<td>5503926
+<td>5503926
+<td>0
+<td>0
+<td>0
+<td>0
+<td>0
+<td>100.00
+<td><span class='traffic-light pass'>&#10004;</span>
+</tbody><caption><span class='file-download-bar'>Download:  <a href='core.csv' class='file-download'>&#11015;core.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='phylotree'>
+<a name='phylotree'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Core SNP Phylogeny <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<div style="text-align: center;">4 taxa, 339 SNPs</div>
+<div id="phylocanvas" style="width: 100%; height: 56pt;">
+<script type="application/javascript" src="https://cdn.rawgit.com/phylocanvas/phylocanvas-quickstart/v2.8.1/phylocanvas-quickstart.js"></script>
+<script type="application/javascript">
+var tree = Phylocanvas.createTree('phylocanvas', {
+  showInternalNodeLabels: true,
+  alignLabels: true,
+  lineWidth: 2,
+  scalebar: { active: true, position: { bottom: 10, centre: 10 } },
+});  
+tree.internalLabelStyle.colour = 'green';
+tree.on('error', function (event) { throw event.error; });
+tree.on('loaded', function () { console.log('loaded phylocanvas'); });
+tree.on('beforeFirstDraw', function () {
+  tree.metadata.headerAngle = 60;
+  tree.metadata.columns = [ 'ST', 'AMR' ];
+  tree.leaves[2].data = { 
+    ST: { label: '1', colour: 'white' },
+    AMR: { label: '-', colour: 'white' },
+  };
+  tree.leaves[0].data = { 
+    ST: { label: '1', colour: 'white' },
+    AMR: { label: '8', colour: 'white' },
+  };
+  tree.leaves[4].data = { 
+    ST: { label: '1', colour: 'white' },
+    AMR: { label: '8', colour: 'white' },
+  };
+  tree.leaves[1].data = { 
+    ST: { label: '2', colour: 'white' },
+    AMR: { label: '8', colour: 'white' },
+  };
+  tree.leaves[3].data = { 
+    ST: { label: '1', colour: 'white' },
+    AMR: { label: '8', colour: 'white' },
+  };
+  tree.leaves[2].labelStyle.format = 'bold';
+});
+tree.load('(SRR1999417:0.666436535,SRR2968135:0.681593901,((Reference:0.0,ref_strain:0.0):0.360427296,SRR2968133:0.162228542)0.216:0.004214538);');
+tree.setTreeType('rectangular');
+tree.setTextSize(14);
+tree.setNodeSize(4);
+tree.draw();
+
+</script>
+</div>
+<span class='file-download-bar'>Download:  <a href='core.newick' class='file-download'>&#11015;core.newick</a></span>
+</div><div class='container-fluid nullarbor-section' id='snpdist'>
+<a name='snpdist'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Pairwise core SNP distances <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+
+<div id='snpdist-histogram'>
+</div>
+<script>
+var nums = [ 162,197,190,169,122,197 ];
+var data = [ { 
+  type: 'histogram',
+  x: nums, 
+  autobinx: false,
+  xbins: { start: 0, end: 197, size: 1 },
+} ];
+var layout = {
+  title: 'Pairwise core SNP distance histogram',
+  xaxis: { title: 'SNP distance' },
+  yaxis: { title: 'Frequency' },
+};
+Plotly.newPlot('snpdist-histogram', data, layout);
+</script>
+<table id='snpdist' class='display compact table-sortable'>
+<thead>
+<tr>
+<th>
+<th><div class='vertical'>Reference</div>
+<th><div class='vertical'>SRR1999417</div>
+<th><div class='vertical'>SRR2968133</div>
+<th><div class='vertical'>SRR2968135</div>
+<th><div class='vertical'>ref_strain</div>
+</thead>
+<tbody>
+<tr>
+<td>Reference
+<td>0
+<td>190
+<td>122
+<td>197
+<td>0
+<tr>
+<td>SRR1999417
+<td>190
+<td>0
+<td>162
+<td>197
+<td>190
+<tr>
+<td>SRR2968133
+<td>122
+<td>162
+<td>0
+<td>169
+<td>122
+<tr>
+<td>SRR2968135
+<td>197
+<td>197
+<td>169
+<td>0
+<td>197
+<tr>
+<td>ref_strain
+<td>0
+<td>190
+<td>122
+<td>197
+<td>0
+</tbody><caption><span class='file-download-bar'>Download:  <a href='snpdist.csv' class='file-download'>&#11015;snpdist.csv</a></span>
+</caption>
+</table>
+</div><div class='container-fluid nullarbor-section' id='snpdensity'>
+<a name='snpdensity'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Core SNP density <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+
+<div id='snpdensity-histogram'>
+</div>
+<script>
+var nums = [ 2376,2578,17294,18322,48627,58812,67034,94155,97988,102439,108749,113869,165761,180681,194935,200731,218157,243867,285634,317808,323707,333579,359536,372205,386402,422826,433277,477179,515711,519537,537318,551400,595491,596604,602705,620527,675622,692932,702761,720997,732173,734302,758676,765499,791840,802560,821008,850519,863876,867050,947760,960470,979412,989385,1001151,1009776,1038759,1050290,1072217,1100682,1101562,1120096,1120886,1131906,1134098,1134110,1134120,1142308,1146814,1146815,1156669,1181950,1224912,1228266,1303210,1304592,1351991,1399271,1409215,1415710,1419414,1431962,1449693,1452485,1479737,1530761,1531733,1542573,1590086,1632687,1643839,1647389,1666035,1721390,1721393,1766641,1771009,1832372,1832719,1833130,1855679,1907260,1949099,1967560,2026733,2042095,2077780,2122348,2168760,2172548,2178917,2184603,2258984,2287062,2317992,2321858,2322617,2366212,2400016,2402034,2424305,2443215,2451468,2451469,2519082,2528887,2614351,2651101,2656190,2664845,2693416,2695371,2698633,2833618,2938421,3025707,3093788,3098839,3099793,3111955,3126496,3138310,3141674,3148331,3189191,3202526,3215548,3221343,3227122,3265469,3269612,3269666,3287006,3344526,3347190,3348749,3353343,3358825,3368390,3371872,3378759,3380414,3382079,3395816,3411871,3453519,3460779,3461720,3528917,3532585,3560815,3568556,3568849,3600057,3600786,3607267,3621380,3688083,3712048,3726311,3745892,3761976,3772659,3810001,3821459,3836105,3851344,3853715,3880674,3889072,3897708,3907337,3943181,3947375,3973911,3983555,3983694,3992047,4044710,4047763,4047764,4050333,4073171,4114364,4135260,4149771,4168478,4190724,4211915,4224126,4238099,4241491,4273667,4280838,4331292,4347810,4355435,4359515,4381352,4486491,4488395,4500574,4513370,4544208,4550842,4563774,4564411,4566863,4620007,4624259,4651930,4661542,4685383,4687868,4715705,4715706,4743707,4760597,4772111,4803052,4824359,4825361,4846267,4851662,4862198,4880766,4896578,4965866,4977107,4998905,5014929,5015594,5019670,5040523,5043497,5048520,5077771,5085543,5118063,5119166,5135426,5140539,5153860,5158582,5175347,5188327,5192916,5197925,5217903,5220325,5227769,5233327,5236525,5242220,5244098,5249852,5251933,5256433,5256499,5258077,5264915,5265369,5268250,5268681,5270326,5278580,5284745,5292955,5294284,5298718,5300344,5309429,5328381,5329701,5340141,5341457,5351900,5354437,5355887,5363040,5370870,5370888,5370889,5370890,5370891,5370897,5370898,5370899,5370901,5370914,5375371,5378232,5380442,5384940,5396813,5396884,5399473,5399767,5409474,5410159,5413136,5419115,5421604,5423192,5439441,5439745,5445456,5448419,5464170,5464171,5464172,5464173,5466222,5467826,5470319,5470624,5474851,5486488,5503127 ];
+var data = [ { 
+  type: 'histogram',
+  x: nums, 
+//  autobinx: false,
+//  xbins: { start: 0, end: 5503127, size: 1 },
+} ];
+var layout = {
+  title: '339 SNPs across 5503926 bp',
+  xaxis: { title: 'Genome position' },
+  yaxis: { title: 'SNPs' },
+};
+Plotly.newPlot('snpdensity-histogram', data, layout);
+</script>
+</div><div class='container-fluid nullarbor-section' id='pan'>
+<a name='pan'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+Pan genome <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+<p class='container-fluid'>
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.0//EN" "http://www.w3.org/TR/2001/REC-SVG-20010904/DTD/svg10.dtd">
+<svg height="100" width="1024" xmlns="http://www.w3.org/2000/svg" xmlns:svg="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+	<rect height="19" style="fill: SteelBlue" width="807.077028414926" x="132" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="939.504279356385" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="939.789113317357" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="940.358781239302" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="2.99075659020883" x="940.643615200274" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.712084902430674" x="944.631290653886" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="946.340294419719" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="947.05237932215" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="948.049298185553" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="948.761383087984" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.470386853817" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.755220814789" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="951.46730571722" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="951.894556658679" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.56966792194454" x="952.606641561109" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="953.31872646354" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="957.876069839096" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.445737761041" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="959.300239643958" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="962.575830195139" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="962.860664156111" y="0" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.430332078055" y="0" />
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="15" y="15">SRR1999417</text>
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="979" y="15">5724</text>
+	<line style="stroke: LightGray" x1="0" x2="1024" y1="20" y2="20" />
+	<rect height="19" style="fill: SteelBlue" width="807.789113317357" x="132" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.854501882916809" x="939.931530297843" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="940.928449161246" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="942.352618966107" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="943.064703868538" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.996918863402944" x="943.634371790483" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="945.343375556316" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="945.913043478261" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="946.625128380692" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="947.194796302636" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="948.476549127011" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="948.90380006847" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="949.188634029442" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="949.758301951386" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.185552892845" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="951.609722697706" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="953.745977404998" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="1.99383772680589" x="954.315645326943" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="957.73365285861" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.872988702499" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="961.151660390277" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="961.578911331736" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="962.433413214653" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="962.718247175625" y="20" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.003081136597" y="20" />
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="15" y="35">SRR2968133</text>
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="979" y="35">5737</text>
+	<line style="stroke: LightGray" x1="0" x2="1024" y1="40" y2="40" />
+	<rect height="19" style="fill: SteelBlue" width="807.504279356385" x="132" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.712084902430674" x="939.646696336871" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="940.501198219788" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="940.78603218076" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="1.70900376583362" x="941.355700102705" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="2.42108866826429" x="943.207120849024" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="945.770626497775" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="946.055460458747" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="946.340294419719" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="1.42416980486135" x="947.337213283122" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="949.473467990414" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="949.900718931873" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.327969873331" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.854501882916809" x="956.309483053749" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.018486819582" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.303320780555" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.588154741527" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="959.015405682985" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="959.727490585416" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="961.294077370763" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="962.006162273194" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.145498117083" y="40" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.715166039028" y="40" />
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="15" y="55">SRR2968135</text>
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="979" y="55">5741</text>
+	<line style="stroke: LightGray" x1="0" x2="1024" y1="60" y2="60" />
+	<rect height="19" style="fill: SteelBlue" width="807.931530297843" x="132" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="2.27867168777816" x="940.073947278329" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="3.56042451215337" x="942.495035946594" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="946.197877439233" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.712084902430674" x="946.482711400205" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.427250941458405" x="947.622047244094" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="948.334132146525" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="948.618966107497" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="949.046217048956" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="949.6158849709" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.043135912359" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="950.612803834303" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.56966792194454" x="950.897637795276" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.28483396097227" x="952.321807600137" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="953.176309483054" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="954.173228346457" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.56966792194454" x="957.163984936666" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.160903800068" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="958.730571722013" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="1.28175282437521" x="959.869907565902" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="962.290996234166" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.287915097569" y="60" />
+	<rect height="19" style="fill: SteelBlue" width="0.142416980486135" x="963.572749058542" y="60" />
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="15" y="75">ref_strain</text>
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="979" y="75">5755</text>
+	<line style="stroke: LightGray" x1="0" x2="1024" y1="80" y2="80" />
+	<text style="fill: black; font-family: sans-serif; font-size: 15" x="132" y="95">4 taxa, 5842 clusters (core + accessory)</text>
+	<!--
+	Generated using the Perl SVG Module V2.84
+	by Ronan Oger
+	Info: http://www.roitsystems.com/
+	-->
+</svg>
+</p>
+<table id='pan' class='table table-bordered table-condensed'>
+<thead>
+<tr>
+<th>Ortholog class
+<th>Definition
+<th>Count
+</thead>
+<tbody>
+<tr>
+<td>Core genes
+<td>(99% <= strains <= 100%)
+<td>5667
+<tr>
+<td>Soft core genes
+<td>(95% <= strains < 99%)
+<td>0
+<tr>
+<td>Shell genes
+<td>(15% <= strains < 95%)
+<td>175
+<tr>
+<td>Cloud genes
+<td>(0% <= strains < 15%)
+<td>0
+<tr>
+<td>Total genes
+<td>(0% <= strains <= 100%)
+<td>5842
+</tbody><caption><span class='file-download-bar'>Download:  <a href='pan.csv' class='file-download'>&#11015;pan.csv</a></span>
+</caption>
+</table>
+<p class='container-fluid'>
+<svg viewBox="0 0 1024 88" width='1024' height='88' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' ><defs><style type='text/css'><![CDATA[
+ .leaf-label {font-size:12;font-family:sans-serif;}
+ .inner-label {opacity:0}
+ .edge-label {opacity:0}
+]]></style></defs>
+<!-- arguments: -S -s -w 1024 -l font-size:12;font-family:sans-serif; -i opacity:0 -b opacity:0 -v 16 results/roary/accessory_binary_genes.fa.newick  -->
+<g transform='translate(0,20)'><g  style='stroke:black;fill:none;stroke-width:1;stroke-linecap:round'><line class='clade_0' x1='10.0000' y1='0.0000' x2='934.0000' y2='0.0000'/><line class='clade_0' x1='10.0000' y1='16.0000' x2='10.0000' y2='16.0000'/><line class='clade_0' x1='223.3676' y1='32.0000' x2='857.7844' y2='32.0000'/><line class='clade_0' x1='223.3676' y1='48.0000' x2='454.5992' y2='48.0000'/><line class='clade_0' x1='223.3676' y1='32.0000' x2='223.3676' y2='48.0000'/><line class='clade_0' x1='10.0000' y1='40.0000' x2='223.3676' y2='40.0000'/><line class='clade_0' x1='10.0000' y1='0.0000' x2='10.0000' y2='40.0000'/><line x1='0' y1='20.0000' x2='10.0000' y2='20.0000'/></g><g style='stroke:none'><text class='leaf-label' x='944.0000' y='4.0000'>SRR2968133</text><text class='edge-label' x='472.000000' y='-4.000000'>0.908041361</text><text class='leaf-label' x='20.0000' y='20.0000'>ref strain</text><text class='edge-label' x='10.000003' y='12.000000'>0.000000005</text><text class='leaf-label' x='867.7844' y='36.0000'>SRR1999417</text><text class='edge-label' x='540.576019' y='28.000000'>0.623459579</text><text class='leaf-label' x='464.5992' y='52.0000'>SRR2968135</text><text class='edge-label' x='338.983444' y='44.000000'>0.227237943</text><text class='inner-label' x='233.3676' y='44.0000'>0.886</text><text class='edge-label' x='116.683821' y='36.000000'>0.209682516</text></g></g></svg>
+
+</p>
+</div><div class='container-fluid nullarbor-section' id='about'>
+<a name='about'></a>
+<h2><span class='dropdown'>
+<button class='btn btn-default dropdown-toggle' type='button' data-toggle='dropdown'>&#9776;</button>
+<ul class='dropdown-menu'><li><a href='#jobinfo'>Report summary</a>
+<li><a href='#seqdata'>Sequence data</a>
+<li><a href='#identification'>Species identification</a>
+<li><a href='#mlst'>MLST</a>
+<li><a href='#resistome'>Resistome</a>
+<li><a href='#virulome'>Virulome</a>
+<li><a href='#assembly'>Assembly and annotation</a>
+<li><a href='#reference'>Reference genome</a>
+<li><a href='#core'>Core genome</a>
+<li><a href='#phylotree'>Core SNP Phylogeny</a>
+<li><a href='#snpdist'>Pairwise core SNP distances</a>
+<li><a href='#snpdensity'>Core SNP density</a>
+<li><a href='#pan'>Pan genome</a>
+<li><a href='#about'>About</a>
+</ul></span>
+About <a href='#' class='jump-home'>&#x25B2;</a> </h2>
+
+<ul class='list-unstyled'>
+<li>This primary author of Nullarbor is <a href="http://tseemann.github.io/">Torsten Seemann</a>.
+<li>You can download the software from <a href="https://github.com/tseemann/nullarbor">Github</a>.
+<li>Please report bugs at the <a href="https://github.com/tseemann/nullarbor/issues">Nullarbor Issue Tracker</a>.
+<li>If you use Nullarbor please use the <a href="https://github.com/tseemann/nullarbor/#citation">latest citation</a>.
+</ul>
+  </div></div>
+ 
+    <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+    <!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script> -->
+    <script src="https://code.jquery.com/jquery-1.12.4.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Datatables (to sort tables) -->
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/dataTables.bootstrap.min.js"></script>
+
+    <!-- Graphing library --> 
+    <!-- <script src="https://cdn.plot.ly/plotly-latest.min.js"></script> -->
+    
+    <script>
+    $(document).ready( function () {
+      $('table.table-sortable').DataTable( {
+        lengthMenu: [[10, 25, 100, -1], [10, 25, 100, "All"]],
+        //scrollY: '50vh',
+        scrollCollapse: true,
+        paging: false,
+        //scrollX: true,
+        //order: [[ -1, "desc" ]],
+      } );
+    } );
+    
+//    $('#go-plain').on('click', function () {
+//      $(this).button('XXX');
+//      $('table.table-sortable').DataTable().destroy(false);
+//    } );
+    </script>
+        
+  </body>
+</html>

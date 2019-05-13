@@ -160,3 +160,4 @@ echo -e "To see what snakemake will do, run: \e[38;5;42m\e[1msnakemake --snakefi
 echo -e "To execute the pipeline, run: \e[38;5;42m\e[1msnakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p \e[39m\e[0m"
 echo "To avoid conda problems, run: export PERL5LIB=\""\"
 #snakemake --snakefile snakeNullarbor.Snakefile -np --cores 128 -p --use-conda
+export PERL5LIB=""
