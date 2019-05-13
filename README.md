@@ -8,20 +8,22 @@ This is an attempt to produce the [nullarbor report](https://github.com/tseemann
 
 ### download the project 
 * Set up a project folder for the run 
+```
 cd /path/to/installation
+```
 * Download the latest version from gitlab   
 ```
 git clone https://gitlab.com/FLI_Bioinfo/snakenullarbor.git
 ```
 
-## Running snakenullarbor 
+## Running the snakenullarbor 
 
 ### 1. Run the bash script `snakenullarbor.sh`
 To start snakenullarbor, run the bash script `snakenullarbor.sh`. Detailed usage is below 
 
 ##### Dependencies 
-* pigz (http://zlib.net/pigz/)
-* seqret (http://emboss.sourceforge.net/apps/cvs/emboss/apps/seqret.html)
+* [pigz](http://zlib.net/pigz/)
+* [seqret](http://emboss.sourceforge.net/apps/cvs/emboss/apps/seqret.html)
 
 ```
 USAGE:
