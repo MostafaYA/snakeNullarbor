@@ -3,7 +3,9 @@
 #date: 21.03.2019
 #Author: Mostafa Abdel-Glil (mostafa.abdel-glil@fli.de)
 #dependencies -> #shovill, spades, trimmomatic
-#TODO (MaSuRCA, A5, velvet, correct the assembly using pilon, reference based assembly, quast)
+#TODO
+#trimming: fastp, trimommatic, sickle
+#(MaSuRCA, A5, velvet, correct the assembly using pilon, reference based assembly, quast)
 #get to the script directory
 pushd . > /dev/null
 DIR="${BASH_SOURCE[0]}"
