@@ -1,6 +1,6 @@
 ## Introduction
 ------------------------------
-This is an attempt to produce the nullarbor report (https://github.com/tseemann/nullarbor) using snakemake (https://snakemake.readthedocs.io/en/stable/)
+This is an attempt to produce the [nullarbor report](https://github.com/tseemann/nullarbor) using [snakemake](https://snakemake.readthedocs.io/en/stable/)
 
 <img src="workflowpic.png" width="1000" />
 
@@ -94,7 +94,7 @@ To avoid conda problems, run: export PERL5LIB=""
 `snakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p`
 
 #### Example output report  
-Find here a [detailed example report](example/example_report.html)
+Find here [an example report](example/), download the folder locally and open the file index.html using web browser 
 
 ## Authors    
 Mostafa Abdel-Glil (mostafa.abdel-glil@fli.de)  
