@@ -1,0 +1,23 @@
+Tool,Version
+Abricate,0.8.10
+BWA MEM,0.7.12-r1039
+FastTree,2.1.9 SSE3:
+FreeBayes,64/libstdc++.so.6: version `GLIBCXX_3.4.20' not found (required by freebayes)
+IQtree,1.6.8 for Linux 64-bit built Oct 29 2018
+Kraken,0.10.6-unreleased
+MLST,2.9
+MegaHit,1.1.4-2-gd1998a1
+Newick-Utils,1.6
+Nullarbor,2.0.20181010
+Prokka,1.13.3
+Roary,(unable to determine version)
+SAMtools,1.9
+SKESA,2.3.0
+SPAdes,3.12.0
+Shovill,1.0.4
+Snippy,4.3.6
+Trimmomatic,0.36
+centrifuge,1.0.4
+seqret,6.6.0.0
+seqtk,1.2-r101-dirty
+snp-dists,0.6.3

@@ -1,0 +1,20 @@
+Isolate,#1 Match,%,#2 Match,%,#3 Match,%,#4 Match,%,Quality
+10CS0074,Campylobacter jejuni,75.92,unclassified,5.63,Campylobacter coli,0.12,Achromobacter xylosoxidans,0.02,?
+10CS0083,Campylobacter jejuni,75.41,unclassified,9.21,Campylobacter coli,1.02,Campylobacter subantarcticus,0.03,?
+10CS0075,Campylobacter jejuni,67.29,unclassified,8.92,Campylobacter coli,0.72,Campylobacter subantarcticus,0.03,?
+10CS0078,Campylobacter jejuni,83.62,unclassified,3.14,Achromobacter xylosoxidans,0.12,Francisella tularensis,0.03,&#10004;
+10CS0079,Campylobacter jejuni,72.71,unclassified,4.55,Campylobacter coli,0.87,Campylobacter subantarcticus,0.04,?
+10CS0082,Campylobacter jejuni,83.53,unclassified,3.44,Campylobacter coli,1.25,Achromobacter xylosoxidans,0.04,&#10004;
+10CS0084,Campylobacter jejuni,76.76,unclassified,6.45,Campylobacter coli,1.33,Campylobacter lari,0.05,?
+10CS0052,Campylobacter jejuni,79.73,unclassified,5.49,Campylobacter coli,0.46,Campylobacter volucris,0.15,?
+10CS0076,Campylobacter jejuni,79.89,unclassified,2.89,Campylobacter coli,0.14,Achromobacter xylosoxidans,0.04,?
+10CS0073,Campylobacter jejuni,84.49,unclassified,1.68,Campylobacter coli,0.51,Salmonella enterica,0.08,&#10004;
+10CS0048,Campylobacter jejuni,76.06,unclassified,6.16,Campylobacter coli,0.26,Achromobacter xylosoxidans,0.03,?
+10CS0080,Campylobacter jejuni,79.61,unclassified,3.79,Campylobacter coli,0.16,Achromobacter xylosoxidans,0.04,?
+10CS0077,Campylobacter jejuni,77.49,unclassified,4.80,Campylobacter coli,0.13,Achromobacter xylosoxidans,0.04,?
+10CS0081,Campylobacter jejuni,80.68,unclassified,5.43,Campylobacter coli,0.52,Campylobacter volucris,0.13,&#10004;
+34471_OXC9939,Campylobacter jejuni,69.81,Campylobacter coli,5.66,unclassified,0.00,None,-,?
+34474_OXC9942,Campylobacter jejuni,91.18,unclassified,0.00,None,-,None,-,&#10004;
+34476_OXC9944,Campylobacter jejuni,96.77,unclassified,0.00,None,-,None,-,&#10004;
+34470_OXC9938,Campylobacter jejuni,83.33,Campylobacter coli,2.08,unclassified,0.00,None,-,&#10004;
+ref_strain,Campylobacter jejuni,100.00,unclassified,0.00,None,-,None,-,&#10004;
