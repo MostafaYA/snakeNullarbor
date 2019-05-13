@@ -78,15 +78,15 @@ Please note:
 To see what snakemake will do, run: snakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -np 
 To execute the pipeline, run: snakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p 
 To avoid conda problems, run: export PERL5LIB=""
-```
-<br>
-<br>
-### 2. Revise and correct the cofig file
+``` 
+
+### 2. Revise and correct the cofig file  
 * After running the bash script `snakenullarbor.sh`, the config file "config.yaml" will be updated with paths to raw reads and snakemake_folder
 * This file "config.yaml" contains also the settings for different software used in the pipleine. These settings could be adjusted based on the user's preferences 
 * __Important__: correct the path to kraken database in the cofig files     
-<br>
-<br>
+
+
+
 #### 3. Execute the snakenullarbor snakefile 
 * The standard output of the `snakenullarbor.sh` involves a hint on how to execute the pipeline with snakemake 
 
@@ -96,7 +96,6 @@ To avoid conda problems, run: export PERL5LIB=""
 #### Example output report  
 Find here a [detailed example report](example/example_report.html)
 
-<br><br>
 ## Authors    
 Mostafa Abdel-Glil (mostafa.abdel-glil@fli.de)  
 Jörg Linde (joerg.linde@fli.de)  
