@@ -9,8 +9,10 @@ This is an attempt to produce the [nullarbor report](https://github.com/tseemann
 ### download the project 
 * Set up a project folder for the run 
 cd /path/to/installation
-* Download the latest version from gitlab  
-`git clone https://gitlab.com/FLI_Bioinfo/snakenullarbor.git`
+* Download the latest version from gitlab   
+```
+git clone https://gitlab.com/FLI_Bioinfo/snakenullarbor.git
+```
 
 ## Running snakenullarbor 
 
@@ -42,7 +44,10 @@ OPTIONAL:
 
 #### Example  
 
-`bash ./snakenullarbor.sh -fq data_example/fastq/ -r data_example/Amesancestor.gbk`  
+```
+bash ./snakenullarbor.sh -fq data_example/fastq/ -r data_example/Amesancestor.gbk
+```
+
 #### Example output of snakenullarbor script 
 
 ```
@@ -91,7 +96,9 @@ To avoid conda problems, run: export PERL5LIB=""
 * The standard output of the `snakenullarbor.sh` involves a hint on how to execute the pipeline with snakemake 
 
 #### Example  
-`snakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p`
+```
+snakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p
+```
 
 #### Example output report  
 Find here [an example report](example/), download the folder locally and open the file index.html using web browser 
