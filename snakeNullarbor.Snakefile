@@ -307,7 +307,7 @@ rule snippy_ln:
         snippy_snps_bam= results_dir + "{sample}/snps.bam",
         snippy_snps_bai= results_dir + "{sample}/snps.bam.bai",
         snippy_snps_log= results_dir + "{sample}/snps.log",
-    threads: 32
+#    threads: 32
     conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{sample}/snippy",
@@ -318,6 +318,7 @@ rule snippy_assemblies:
         contig = fasta_dir + "{genome}.fasta"
     output:
         snippy_snps= results_dir + "{genome}/snippy/snps.tab",
+    threads: 32
     conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{genome}/snippy",
@@ -422,7 +423,7 @@ rule Roary_svg: #run roary
     output:
         acc_svg= results_dir + "roary/acc.svg",
         pan_svg= results_dir + "roary/pan.svg",
-    threads: 64
+    #threads: 64
     conda: envs_folder + "perl.yaml"
     params:
         options=config["roary_params"],

@@ -150,7 +150,7 @@ if [[ -e config.yaml ]]; then
   sed -i "s|fasta_dir: |fasta_dir: $outdir/ #|g" $config
   sed -i "s|reference: |reference: $reference #|g" $config
 else
-  echo -e "\e[1m\e[38:2:240:143:104mCannot find the file: config.yaml. Please update it manually with the paths of the raw_data_dir and the fasta_dir\e[0m\e[39m"
+  echo -e "\e[1m\e[38:2:240:143:104mCannot find the file: config.yaml. Please update it manually with these paths \nraw_data_dir:\e[0m\e[39m $outdir/ \e[1m\e[38:2:240:143:104m\nfasta_dir:\e[0m\e[39m $outdir/ \e[1m\e[38:2:240:143:104m\nreference:\e[0m\e[39m $reference"
 fi
 
 echo "--------------------------------------------------------------------------------"
