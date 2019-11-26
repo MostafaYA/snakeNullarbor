@@ -32,7 +32,7 @@ configfile: "config.yaml"
 snakemake_folder=config['snakemake_folder']
 raw_data_dir=config['raw_data_dir']
 fasta_dir=config['fasta_dir']
-results_dir="results/" #hardcoded in certain rules, don't change
+results_dir=config['results_dir'] 
 temporary_todelete= results_dir + "temporary_todelete/"
 
 #samples
@@ -69,8 +69,26 @@ if "MLST_options" in config:
     MLST_options= config["MLST_options"]
 else:
     MLST_options= ""
+#abricate_parameters
+if "abricate_vir_options" in config:
+    abricate_vir_options= config["abricate_vir_options"]
+else:
+    abricate_vir_options= ""
+if "abricate_res_options" in config:
+    abricate_res_options= config["abricate_res_options"]
+else:
+    abricate_res_options= ""
+if "snippy_options" in config:
+    snippy_options= config["snippy_options"]
+else:
+    snippy_options= ""
+if "assembler_options" in config:
+    assembler_options= config["assembler_options"]
+else:
+    assembler_options= ""
+
 assembler= "shovill",
-assembler_options= ""
+#assembler_options= ""
 taxoner= config["taxoner"]
 reference= config["reference"]
 
@@ -130,7 +148,7 @@ rule assembly:
         assembler = assembler_options,
         assembly_dir = directory (results_dir + "{sample}")
     shell:
-        "bash {bin_dir}assembly.sh -a {assembler} --R1 {input.r1} --R2 {input.r2} -o {output.contig} -d {params.assembly_dir}/{assembler}  -p {threads} -f true " #-t trimmomatic
+        "bash {bin_dir}assembly.sh -a {assembler} --R1 {input.r1} --R2 {input.r2} -o {output.contig} -d {params.assembly_dir}/{assembler}  -p {threads} {assembler_options} " #-t trimmomatic -f true
 """
 kraken
 """
@@ -171,7 +189,7 @@ rule fasta_denovo:
     conda:
         envs_folder + "perl.yaml"
     shell:
-        "{nullarbor_bin}fa --minsize 500 -e -t {input.fasta} {input.fasta_assembly} | sed 's#results/##g' | tee -a {output.denovo}"
+        """var={results_dir} && {nullarbor_bin}fa --minsize 500 -e -t {input.fasta} {input.fasta_assembly} | sed "s#$var##g" | tee -a {output.denovo}"""
 """
 reference
 """
@@ -231,7 +249,7 @@ rule virulome:
     params:
         VF_db_abricate = VF_db_abricate,
     shell:
-        "abricate --db {params.VF_db_abricate} --threads {threads} {input.contig} > {output.virulome}"
+        "abricate --db {params.VF_db_abricate} --threads {threads} {abricate_vir_options} {input.contig} > {output.virulome}"
 
 """
 resistome
@@ -247,7 +265,7 @@ rule resistome:
     params:
         AMR_db_abricate = AMR_db_abricate,
     shell:
-        "abricate --db {params.AMR_db_abricate} --threads {threads} {input.contig} > {output.resistome}"
+        "abricate --db {params.AMR_db_abricate} --threads {threads} {abricate_res_options} {input.contig} > {output.resistome}"
 
 """
 Prokka
@@ -265,8 +283,12 @@ rule prokka:
         prefix="{sample}",
         strain_name="{sample}",
         locustag= "{sample}",
+        sqn= results_dir + "{sample}/prokka/{sample}.sqn",
+        fna= results_dir + "{sample}/prokka/{sample}.fna",
+        fsa= results_dir + "{sample}/prokka/{sample}.fsa",
+        tbl= results_dir + "{sample}/prokka/{sample}.tbl",
     shell:
-        "prokka --cpus {threads} --force --kingdom Bacteria --outdir {params.prokka_outdir}/ --prefix {params.prefix} --genus {prokka_genustag} --gcode 11 --locustag {params.locustag} --strain {params.strain_name} {prokka_params} {input.contig} 2>&1 | sed 's/^/[prokka] /' " #--centre Institute --compliant to generate clean contig names
+        """prokka --cpus {threads} --force --kingdom Bacteria --outdir {params.prokka_outdir}/ --prefix {params.prefix} --genus {prokka_genustag} --gcode 11 --locustag {params.locustag} --strain {params.strain_name} {prokka_params} {input.contig} 2>&1 | sed 's/^/[prokka] /' && rm {params.sqn} {params.fsa} {params.fna} {params.tbl}""" #--centre Institute --compliant to generate clean contig names
 rule prokka_ln:
     input:
         prokka_gff= results_dir + "{sample}/prokka/{sample}.gff",
@@ -295,24 +317,23 @@ rule snippy:
         snippy_outdir= results_dir + "{sample}/snippy",
         #snippy_outdir_cp= results_dir + "{sample}/",
     shell:
-        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --R1 {input.r1} --R2 {input.r2} 2>&1 | sed 's/^/[snippy] /'"
+        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --R1 {input.r1} --R2 {input.r2} {snippy_options} 2>&1 | sed 's/^/[snippy] /'"
 rule snippy_ln:
     input:
         snippy_snps= results_dir + "{sample}/snippy/snps.tab",
     output:
         snippy_snps_tab=  results_dir + "{sample}/snps.tab",
         snippy_snps_aligned= results_dir + "{sample}/snps.aligned.fa",
-        snippy_snps_rawvcf= results_dir + "{sample}/snps.raw.vcf",
+        #snippy_snps_rawvcf= results_dir + "{sample}/snps.raw.vcf",
         snippy_snps_vcf= results_dir + "{sample}/snps.vcf",
-        snippy_snps_bam= results_dir + "{sample}/snps.bam",
-        snippy_snps_bai= results_dir + "{sample}/snps.bam.bai",
+        #snippy_snps_bam= results_dir + "{sample}/snps.bam",
+        #snippy_snps_bai= results_dir + "{sample}/snps.bam.bai",
         snippy_snps_log= results_dir + "{sample}/snps.log",
-#    threads: 32
     conda: envs_folder + "snippy.yaml"
     params:
         snippy_outdir= results_dir + "{sample}/snippy",
     shell:
-        "ln -s -f $(realpath {params.snippy_outdir}/snps.tab) {output.snippy_snps_tab}; ln -s -f $(realpath {params.snippy_outdir}/snps.aligned.fa) {output.snippy_snps_aligned} ; ln -s -f $(realpath {params.snippy_outdir}/snps.raw.vcf) {output.snippy_snps_rawvcf}; ln -s -f $(realpath {params.snippy_outdir}/snps.vcf) {output.snippy_snps_vcf}; ln -s -f $(realpath {params.snippy_outdir}/snps.bam) {output.snippy_snps_bam}; ln -s -f $(realpath {params.snippy_outdir}/snps.bam.bai) {output.snippy_snps_bai}; ln -s -f $(realpath {params.snippy_outdir}/snps.log) {output.snippy_snps_log}"
+        "ln -s -f $(realpath {params.snippy_outdir}/snps.tab) {output.snippy_snps_tab}; ln -s -f $(realpath {params.snippy_outdir}/snps.aligned.fa) {output.snippy_snps_aligned} ;  ln -s -f $(realpath {params.snippy_outdir}/snps.vcf) {output.snippy_snps_vcf};  ln -s -f $(realpath {params.snippy_outdir}/snps.log) {output.snippy_snps_log}" #ln -s -f $(realpath {params.snippy_outdir}/snps.bam) {output.snippy_snps_bam}; ln -s -f $(realpath {params.snippy_outdir}/snps.bam.bai) {output.snippy_snps_bai}; ln -s -f $(realpath {params.snippy_outdir}/snps.raw.vcf) {output.snippy_snps_rawvcf};
 rule snippy_assemblies:
     input:
         contig = fasta_dir + "{genome}.fasta"
@@ -323,7 +344,7 @@ rule snippy_assemblies:
     params:
         snippy_outdir= results_dir + "{genome}/snippy",
     shell:
-        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --ctgs {input.contig}  2>&1 | sed 's/^/[snippy] /'"
+        "snippy --force  --cpus {threads} --ram {threads} --outdir {params.snippy_outdir} --ref {reference} --ctgs {input.contig} {snippy_options} 2>&1 | sed 's/^/[snippy] /'"
 
 def snippy_folders(wildcards):
     return expand(results_dir + "{sample}", sample=SAMPLES)
@@ -336,17 +357,17 @@ rule snippy_core:
         #snippy_folders_assemblies=  expand( results_dir + "{genome}", genome=GENOMES),
         a=expand( results_dir + "{sample}/snps.tab", sample=SAMPLES),
         b=expand( results_dir + "{sample}/snps.aligned.fa", sample=SAMPLES),
-        c=expand( results_dir + "{sample}/snps.raw.vcf", sample=SAMPLES),
+        #c=expand( results_dir + "{sample}/snps.raw.vcf", sample=SAMPLES),
         d=expand( results_dir + "{sample}/snps.vcf", sample=SAMPLES),
-        e=expand( results_dir + "{sample}/snps.bam", sample=SAMPLES),
-        f=expand( results_dir + "{sample}/snps.bam.bai", sample=SAMPLES),
+        #e=expand( results_dir + "{sample}/snps.bam", sample=SAMPLES),
+        #f=expand( results_dir + "{sample}/snps.bam.bai", sample=SAMPLES),
         g=expand( results_dir + "{sample}/snps.log", sample=SAMPLES),
         h=expand( results_dir + "{genome}/snps.tab", genome=GENOMES),
         i=expand( results_dir + "{genome}/snps.aligned.fa", genome=GENOMES),
-        j=expand( results_dir + "{genome}/snps.raw.vcf", genome=GENOMES),
+        #j=expand( results_dir + "{genome}/snps.raw.vcf", genome=GENOMES),
         k=expand( results_dir + "{genome}/snps.vcf", genome=GENOMES),
-        l=expand( results_dir + "{genome}/snps.bam", genome=GENOMES),
-        m=expand( results_dir + "{genome}/snps.bam.bai", genome=GENOMES),
+        #l=expand( results_dir + "{genome}/snps.bam", genome=GENOMES),
+        #m=expand( results_dir + "{genome}/snps.bam.bai", genome=GENOMES),
         n=expand( results_dir + "{genome}/snps.log", genome=GENOMES),
     output:
         snippycore= results_dir + "core.aln",
@@ -357,7 +378,7 @@ rule snippy_core:
         snippy_folders_assemblies = snippy_folders_assemblies,
         #snippy_outdir_cp= results_dir + "{sample}/",
     shell:
-        "snippy-core  --ref {reference} {params.snippy_folders} {params.snippy_folders_assemblies} --prefix {params.snippycoreoutdir}  2>&1 | sed 's/^/[snippy-core] /'"
+        """ var={results_dir}Reference && snippy-core  --ref {reference} {params.snippy_folders} $(echo {params.snippy_folders_assemblies} | sed "s#$var##g") --prefix {params.snippycoreoutdir}  2>&1 | sed 's/^/[snippy-core] /'"""
 """
 Core genome phylogeny using FastTree
 """
@@ -367,7 +388,7 @@ rule FastTree: #run fasttree
     output:
         phylogeny_tree= results_dir + "core.newick",
         phylogeny_svg= results_dir + "core.svg"
-    threads: 64
+    #threads: 64
     #benchmark: benchmarks_folder + "FastTree.txt"
     conda: envs_folder + "FastTree.yaml" #needs revision
     shell:
@@ -412,7 +433,7 @@ rule Roary_plots:
         #options=config["roary_params"],
         Roary_dir=results_dir + "roary"
     shell:
-        " python3 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
+        " python3.5 {bin_dir}roary_plots.py {params.Roary_dir}/accessory_binary_genes.fa.newick {params.Roary_dir}/gene_presence_absence.csv"
         " && mv -t {params.Roary_dir} pangenome_frequency.png pangenome_matrix.png pangenome_pie.png"
 #source ~/.bash_profile SVG.pm
 rule Roary_svg: #run roary
@@ -439,13 +460,13 @@ rule MLST:
     input:
         contigs= expand(results_dir + "{sample}/contigs.fa", sample=SAMPLES),
         contigs_assemblies= expand(results_dir + "{genome}/contigs.fa", genome=GENOMES),
-        ref_fasta= results_dir + "ref.fa",
+        #ref_fasta= results_dir + "ref.fa",
     output:
         mlstresults= results_dir + "mlst.tab",
     conda:
         envs_folder + "mlst.yaml"
     shell:
-        "mlst --quiet {MLST_options} {input.ref_fasta} {input.contigs} {input.contigs_assemblies} | sed 's#results/##g' | tee -a {output.mlstresults}"
+        """var={results_dir} && mlst --quiet {MLST_options} {input.contigs} {input.contigs_assemblies} | sed "s#$var##g" | tee -a {output.mlstresults}"""   #{input.ref_fasta}
 """
 snpdists
 """

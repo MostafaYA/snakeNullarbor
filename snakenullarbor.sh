@@ -133,8 +133,8 @@ if [[ $((ls ${fastadir}/*{fasta,fna,fa,fsa,fs,fnn} 2> /dev/null | xargs -n 1 bas
 if [[ -e $reference ]]; then
   reference=$(realpath $(ls $reference 2>/dev/null ) 2>/dev/null)
   echo "Writing reference sequences"
-  echo "seqret -auto -filter -osformat2 fasta < $reference > "$outdir"/ref_strain.fasta"
-  seqret -auto -filter -osformat2 fasta < $reference > "$outdir"/ref_strain.fasta
+  echo "seqret -auto -filter -osformat2 fasta < $reference > "$outdir"/Reference.fasta"
+  seqret -auto -filter -osformat2 fasta < $reference > "$outdir"/Reference.fasta
 fi
 #run snakemake command
 echo "--------------------------------------------------------------------------------"
@@ -145,10 +145,10 @@ echo "writing config file"
 if [[ -e config.yaml ]]; then
   config=config.yaml
   echo -e "Found $config. Assume that the current directory is where the snakenullarbor is downloaded. Update the $config file with the paths..."
-  var=`pwd`; sed -i "s|snakemake_folder: |snakemake_folder: $var/ #|g" $config
-  sed -i "s|raw_data_dir: |raw_data_dir: $outdir/ #|g" $config
-  sed -i "s|fasta_dir: |fasta_dir: $outdir/ #|g" $config
-  sed -i "s|reference: |reference: $reference #|g" $config
+  var=`pwd`; sed -e "s|snakemake_folder: |snakemake_folder: $var/ #|g" $config > "$outdir"/"$config"
+  sed -i "s|raw_data_dir: |raw_data_dir: $outdir/ #|g" "$outdir"/"$config"
+  sed -i "s|fasta_dir: |fasta_dir: $outdir/ #|g" "$outdir"/"$config"
+  sed -i "s|reference: |reference: $reference #|g" "$outdir"/"$config"
 else
   echo -e "\e[1m\e[38:2:240:143:104mCannot find the file: config.yaml. Please update it manually with these paths \nraw_data_dir:\e[0m\e[39m $outdir/ \e[1m\e[38:2:240:143:104m\nfasta_dir:\e[0m\e[39m $outdir/ \e[1m\e[38:2:240:143:104m\nreference:\e[0m\e[39m $reference"
 fi
@@ -156,8 +156,8 @@ fi
 echo "--------------------------------------------------------------------------------"
 echo "Please note:"
 #echo "Prokka does not like names >37 characters, use 'cd $outdir/ && for f in *.fasta; do echo \${#f}; done' to verify"
-echo -e "To see what snakemake will do, run: \e[38;5;42m\e[1msnakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -np \e[39m\e[0m"
-echo -e "To execute the pipeline, run: \e[38;5;42m\e[1msnakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda -p \e[39m\e[0m"
+echo -e "To see what snakemake will do, run: \e[38;5;42m\e[1msnakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda --keep-going --rerun-incomplete --configfile "$outdir"/"$config" -np \e[39m\e[0m"
+echo -e "To execute the pipeline, run: \e[38;5;42m\e[1msnakemake --snakefile snakeNullarbor.Snakefile --cores 128 --use-conda --keep-going --rerun-incomplete --configfile "$outdir"/"$config" -p \e[39m\e[0m"
 echo "To avoid conda problems, run: export PERL5LIB=\""\"
 #snakemake --snakefile snakeNullarbor.Snakefile -np --cores 128 -p --use-conda
 export PERL5LIB=""

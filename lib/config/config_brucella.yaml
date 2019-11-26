@@ -1,0 +1,25 @@
+snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ 
+raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ ##
+fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ ##
+taxoner: kraken
+
+trimmer: trimmomatic
+assembler: shovill #choose between [shovill spades megahit sksea]
+assembler_options: --trim
+filter: yes
+reference: /data/AGr130/mostafa/GCF_000007125.gb #/data/AGr180_Gast/AG180_Mostafa/Gamal_acinetobacter/CP009257.1.gbk #/data/Clostridia/perfringens/ATCC_13124.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk # /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr180_Gast/AG180_Mostafa/Pasteurella_multocida_NZ_CP008918.1/NZ_CP008918.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk  
+
+AMR_db_abricate: ncbi
+#abricate_res_options: --datadir /home/mostafa.abdel/tools/abricate/bin/../db
+VF_db_abricate:  vfdb # clostridiumPerfringensVirulence_58 #vfdb_setB_full #vfdb_setB_nt #
+#abricate_vir_options: --datadir /home/mostafa.abdel/tools/abricate/bin/../db --minid 90 --mincov 70
+
+prokka_genustag: Brucella #Campylobacter #Bacillus #Pasteurella # Campylobacter #
+prokka_params: --mincontiglen 500 #--fast --norrna --notrna
+
+roary_params: -e -n -r -v #-i 90 -s #-e, core genes alignment using PRANK, -n using mafft, -r for Rplots, # sometimes you may need to set -i (percentage identity for blastp) and -s (dont split paralogs), according to the organism
+
+#shovill_assembler: --assembler spades #choose between [spades megahit sksea]
+#shovill_options: --trim #choose between different shovill parameters [--trim --noreadcorr --nostitch --nocorr --minlen 500 --mincov 5 --keepfiles ] #--depth 0 to disable the Sub-sampling of the reads to 100
+#MLST_options: --scheme pmultocida_multihost # pmultocida_rirdc #campylobacter #choose/exclude MLST schemes [--scheme ypseudotuberculosis --exclude campylobacter,yersinia]
+kraken: /home/DB_RAM/KrakenDB #/home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB #

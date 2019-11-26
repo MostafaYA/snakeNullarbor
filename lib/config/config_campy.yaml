@@ -1,0 +1,49 @@
+#==================================================
+#==========   INPUT data    =======================
+#==================================================
+#export LD_LIBRARY_PATH=/usr/local/lib:/usr/lib:/usr/local/lib64:/usr/lib64
+#export PERL5LIB=$PERL5LIB:/home/software/Roary/lib/
+#source ~/.bash_profile
+
+#directories #Dont forget the backslash at the end of the path
+snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/ 
+raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ ##
+fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ #/home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input/ ##
+#==================================================
+#==========   SOFTWARE settings    ================
+#==================================================
+taxoner: kraken
+#assembly
+trimmer: trimmomatic
+assembler: shovill #choose between [shovill spades megahit sksea]
+assembler_options: --trim
+filter: yes
+reference: /data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/cfv/cfv_97-608.gbk #/data/Clostridia/perfringens/ATCC_13124.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk # /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr180_Gast/AG180_Mostafa/Pasteurella_multocida_NZ_CP008918.1/NZ_CP008918.1.gbk #  
+#Resistance and virulence dbs
+AMR_db_abricate: ncbi
+#abricate_res_options: --datadir /home/mostafa.abdel/tools/abricate/bin/../db
+VF_db_abricate:  vfdb # clostridiumPerfringensVirulence_58 #vfdb_setB_full #vfdb_setB_nt #
+#abricate_vir_options: --datadir /home/mostafa.abdel/tools/abricate/bin/../db --minid 90 --mincov 70
+#prokka
+prokka_genustag: Campylobacter #Bacillus #Pasteurella # Campylobacter #clostridia #
+prokka_params: --mincontiglen 500 #--fast --norrna --notrna
+#Pangenome
+roary_params: -e -n -r -v -i 90 -s #-e, core genes alignment using PRANK, -n using mafft, -r for Rplots, # sometimes you may need to set -i (percentage identity for blastp) and -s (dont split paralogs), according to the organism
+#assembly_options
+#shovill_assembler: --assembler spades #choose between [spades megahit sksea]
+#shovill_options: --trim #choose between different shovill parameters [--trim --noreadcorr --nostitch --nocorr --minlen 500 --mincov 5 --keepfiles ] #--depth 0 to disable the Sub-sampling of the reads to 100
+MLST_options: --scheme cfetus #pmultocida_multihost # pmultocida_rirdc #campylobacter #choose/exclude MLST schemes [--scheme ypseudotuberculosis --exclude campylobacter,yersinia]
+#==================================================
+#==========   DATABASES settings    ===============
+#==================================================
+#databases (The path to databases must be adapted)
+kraken: /home/mostafa.abdel/dbs/miniKraken/minikraken_20171019_8GB #/home/DB_RAM/KrakenDB #/home/DB_RAM/KrakenDB #
+#==================================================
+#==========  Pathogen specific rule settings ======
+#==================================================
+#plasmids Bacillus anthracis
+pathogen_specific_db: bacillus_anthracis_plasmids_db
+pathogen_specific_output: plasmid.tab
+#
+#
+#

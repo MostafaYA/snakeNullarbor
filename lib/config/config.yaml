@@ -7,10 +7,10 @@
 
 #directories #Dont forget the backslash at the end of the path
 snakemake_folder: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/   
-raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/old_projects/input_anthrax_alexandra_126Strains/
-fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/old_projects/input_anthrax_alexandra_126Strains/ 
-results_dir: old_projects/results_anthrax_alexandra_126Strains/
-reference: /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr130/mostafa/brucella_hosny_abortus/B_abortus_ref/B_abortus_ref.gbk #/data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr130/mostafa/brucella_hosny_abortus/B_abortus_ref/B_abortus_ref.gbk #/data/AGr130/mostafa/GCF_000007125.gb #/data/AGr180_Gast/AG180_Mostafa/Gamal_acinetobacter/CP009257.1.gbk #/data/Clostridia/perfringens/ATCC_13124.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk # /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr180_Gast/AG180_Mostafa/Pasteurella_multocida_NZ_CP008918.1/NZ_CP008918.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk  
+raw_data_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input_ringtrail_banthracis_new/ 
+fasta_dir: /home/mostafa.abdel/aProjects/gitProjects/snakenullarbor/input_ringtrail_banthracis_new/ 
+results_dir: results_ringtrail_banthracis_new/
+
 
 #==================================================
 #==========   SOFTWARE settings    ================
@@ -18,10 +18,10 @@ reference: /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr110/m
 taxoner: kraken
 trimmer: trimmomatic
 assembler: shovill #choose between [shovill spades megahit sksea]
-#assembler_options: -t trimmomatic -f true #--trim
+assembler_options: --trim
 filter: yes
- 
-snippy_options: --mincov 5 --cleanup 
+reference: /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr130/mostafa/brucella_hosny_abortus/B_abortus_ref/B_abortus_ref.gbk #/data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr130/mostafa/brucella_hosny_abortus/B_abortus_ref/B_abortus_ref.gbk #/data/AGr130/mostafa/GCF_000007125.gb #/data/AGr180_Gast/AG180_Mostafa/Gamal_acinetobacter/CP009257.1.gbk #/data/Clostridia/perfringens/ATCC_13124.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk # /data/AGr110_Gast/Chiaverini/Anthrax/Amesancestor.gbk #/data/AGr180_Gast/AG180_Mostafa/Pasteurella_multocida_NZ_CP008918.1/NZ_CP008918.1.gbk #/data/AGr110/mostafa/campylobacter/campyFetus_all/CP000487/CP000487.1.gbk  
+
 
 AMR_db_abricate: ncbi
 #abricate_res_options: --datadir /home/mostafa.abdel/tools/abricate/bin/../db
