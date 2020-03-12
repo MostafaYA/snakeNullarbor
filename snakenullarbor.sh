@@ -96,8 +96,8 @@ fi ;
 echo "Creating links for the fastq reads"
 for ID in $(awk 'BEGIN{FS="_"}{ print $1 }' <(ls ${fastqdir}/*.{fastq,fq}.gz 2> /dev/null | xargs -n 1 basename 2> /dev/null) | uniq | sort);
   do
-    FILES1=$(realpath $(ls ${fastqdir}/${ID}*_R1_*.gz  2>/dev/null ) 2>/dev/null)
-    FILES2=$(realpath $(ls ${fastqdir}/${ID}*_R2_*.gz  2>/dev/null ) 2>/dev/null)
+    FILES1=$(realpath $(ls ${fastqdir}/${ID}_*_R1_*.gz  2>/dev/null ) 2>/dev/null)
+    FILES2=$(realpath $(ls ${fastqdir}/${ID}_*_R2_*.gz  2>/dev/null ) 2>/dev/null)
         NF1=$(echo $FILES1 | awk '{print NF}')
     if [[ $NF1 -lt 1 ]]
     then

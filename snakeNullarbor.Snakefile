@@ -86,6 +86,10 @@ if "assembler_options" in config:
     assembler_options= config["assembler_options"]
 else:
     assembler_options= ""
+if "kraken2_opts" in config:
+    kraken2_opts= config["kraken2_opts"]
+else:
+    kraken2_opts= ""
 
 assembler= "shovill",
 #assembler_options= ""
@@ -162,9 +166,9 @@ rule kraken:
         kraken_tab= results_dir + "{sample}/kraken.tab"
     threads: 32
     conda:
-      envs_folder + "kraken.yaml"
+      envs_folder + "kraken2.yaml"
     shell:
-        "kraken --db {input.db} --paired --check-names --threads {threads} --gzip-compressed --fastq-input {input.r1} {input.r2} | kraken-report --db {input.db} > {output.kraken_tab} 2>&1 | sed 's/^/[kraken] /'"
+        "kraken2 --db {input.db} --paired --check-names --threads {threads} --gzip-compressed  {input.r1} {input.r2} --output -  --report {output.kraken_tab} {kraken2_opts} 2>&1 | sed 's/^/[kraken] /'"
 rule kraken_assemblies:
     input:
         assemblies = fasta_dir + "{genome}.fasta",
@@ -174,9 +178,9 @@ rule kraken_assemblies:
         kraken_tab= results_dir + "{genome}/kraken.tab"
     threads: 32
     conda:
-      envs_folder + "kraken.yaml"
+      envs_folder + "kraken2.yaml"
     shell:
-        "kraken --db {input.db} --threads {threads} --fasta-input {input.assemblies} | kraken-report --db {input.db} > {output.kraken_tab} 2>&1 | sed 's/^/[kraken] /'"
+        "kraken2 --db {input.db} --threads {threads}  {input.assemblies} --output -  --report {output.kraken_tab} {kraken2_opts} 2>&1 | sed 's/^/[kraken] /'"
 """
 denovo fasta
 """
@@ -277,7 +281,7 @@ rule prokka:
         prokka_gff= results_dir + "{sample}/prokka/{sample}.gff",
         prokka_gbk= results_dir + "{sample}/prokka/{sample}.gbk",
     threads: 32
-    conda: envs_folder + "prokka.yaml"
+    conda: envs_folder + "prokka_1.14.5.yaml"
     params:
         prokka_outdir= results_dir + "{sample}/prokka",
         prefix="{sample}",
